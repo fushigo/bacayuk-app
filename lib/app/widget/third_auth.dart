@@ -6,7 +6,7 @@ class ThirdAuth extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Container(
           padding: const EdgeInsets.all(10),

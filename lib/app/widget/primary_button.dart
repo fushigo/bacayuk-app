@@ -17,14 +17,14 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue,
+          backgroundColor: Colors.blue.shade900,
           padding:
               EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical)),
       onPressed: onPressed,
       child: Text(
         text,
         style: const TextStyle(
-            color: Colors.white, fontFamily: "Poppins", fontSize: 14),
+            color: Colors.white, fontFamily: "Poppins", fontSize: 16),
       ),
     );
   }

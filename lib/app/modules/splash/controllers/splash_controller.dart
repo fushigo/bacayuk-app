@@ -1,9 +1,12 @@
+import 'dart:developer';
+
+import 'package:bacayuk/app/data/provider/storage_provider.dart';
+import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class SplashController extends GetxController {
   //TODO: Implement SplashController
 
-  final count = 0.obs;
   @override
   void onInit() {
     super.onInit();
@@ -19,5 +22,15 @@ class SplashController extends GetxController {
     super.onClose();
   }
 
-  void increment() => count.value++;
+  void checkSession() {
+    String token = StorageProvider.read(StorageKey.token);
+    String status = StorageProvider.read(StorageKey.status);
+    log(token);
+    log("Status: $status");
+    if (status == "logged") {
+      Get.offAllNamed(Routes.HOME);
+    } else {
+      Get.offAllNamed(Routes.WELCOME);
+    }
+  }
 }

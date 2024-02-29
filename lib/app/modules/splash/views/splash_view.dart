@@ -13,7 +13,9 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: Center(
           child: FlutterSplashScreen.scale(
-        nextScreen: const WelcomeView(),
+        onEnd: () {
+          controller.checkSession();
+        },
         gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

@@ -25,6 +25,7 @@ dev_dependencies:
 flutter:
   assets:
     - asset/image/
+    - asset/json/
   fonts:
     - family: Poppins
       fonts:

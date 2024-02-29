@@ -1,4 +1,4 @@
-import 'package:bacayuk/app/modules/login/widget/login_form.dart';
+import 'package:bacayuk/app/widget/login_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
 import 'package:bacayuk/app/widget/third_auth.dart';
@@ -44,18 +44,49 @@ class LoginView extends GetView<LoginController> {
                   ],
                 ),
               ),
-              LoginForm(
-                formKey: controller.formKey,
-                emailController: controller.emailController,
-                passwordController: controller.passwordController,
-              ),
-              ButtonWidget(
-                onPressed: () {
-                  controller.login();
-                },
-                text: "Sign In",
-                horizontal: 100,
-                vertical: 12.00,
+              const LoginForm(),
+              SizedBox(
+                child: Column(
+                  children: [
+                    ButtonWidget(
+                      onPressed: () {
+                        controller.login();
+                      },
+                      text: "Sign In",
+                      horizontal: 150,
+                      vertical: 12.00,
+                    ),
+                    Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        alignment: Alignment.center,
+                        width: MediaQuery.of(context).size.width,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              "Don’t have an account? ",
+                              style: TextStyle(
+                                  fontFamily: "Poppins", fontSize: 14),
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            InkWell(
+                              onTap: () {
+                                Get.offAllNamed(Routes.REGISTER);
+                              },
+                              child: const Text(
+                                "Sign Up",
+                                style: TextStyle(
+                                    color: Colors.blueAccent,
+                                    fontFamily: "Poppins",
+                                    fontSize: 14),
+                              ),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -80,39 +111,8 @@ class LoginView extends GetView<LoginController> {
                   )
                 ],
               ),
-              SizedBox(
-                height: 85,
-                child: Column(
-                  children: [
-                    const ThirdAuth(),
-                    Container(
-                        margin: const EdgeInsets.only(top: 20),
-                        alignment: Alignment.center,
-                        width: MediaQuery.of(context).size.width,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            const Text(
-                              "Don’t have an account? ",
-                              style: TextStyle(
-                                  fontFamily: "Poppins", fontSize: 14),
-                            ),
-                            InkWell(
-                              onTap: () {
-                                Get.offAllNamed(Routes.REGISTER);
-                              },
-                              child: const Text(
-                                "Sign Up",
-                                style: TextStyle(
-                                    color: Colors.blueAccent,
-                                    fontFamily: "Poppins",
-                                    fontSize: 14),
-                              ),
-                            )
-                          ],
-                        ))
-                  ],
-                ),
+              const SizedBox(
+                child: ThirdAuth(),
               ),
             ],
           ),
