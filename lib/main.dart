@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/modules/splash/bindings/splash_binding.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -10,6 +11,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialBinding: SplashBinding(),
       title: "Bacayuk",
       initialRoute: AppPages.INITIAL,
       getPages: AppPages.routes,

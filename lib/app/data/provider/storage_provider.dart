@@ -6,7 +6,7 @@ class StorageProvider {
   }
 
   static String read(key) {
-    try{
+    try {
       return GetStorage().read(key);
     } catch (e) {
       return "";
@@ -20,5 +20,28 @@ class StorageProvider {
 
 class StorageKey {
   static const String status = "status";
+  static const String authtoken = "authtoken";
   static const String token = "token";
 }
+
+// class StorageProvider {
+//   static final _box = GetStorage();
+
+//   static Future<void> write(String key, String value) async {
+//     await _box.write(key, value);
+//   }
+
+//   static String read(String key) {
+//     return _box.read(key) ?? "";
+//   }
+
+//   static void clearAll() {
+//     _box.erase();
+//   }
+// }
+
+// class StorageKey {
+//   static const String status = "status";
+//   static const String authtoken = "authtoken";
+//   static const String token = "token";
+// }

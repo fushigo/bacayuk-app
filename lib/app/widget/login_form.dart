@@ -1,22 +1,16 @@
+import 'package:bacayuk/app/modules/login/controllers/login_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/state_manager.dart';
 
-class LoginForm extends StatelessWidget {
-  const LoginForm(
-      {super.key,
-      required this.formKey,
-      required this.emailController,
-      required this.passwordController});
-
-  final GlobalKey<FormState> formKey;
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
+class LoginForm extends GetView<LoginController> {
+  const LoginForm({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 230,
       child: Form(
-        key: formKey,
+        key: controller.formKey,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +29,7 @@ class LoginForm extends StatelessWidget {
                   height: 45,
                   child: TextFormField(
                     cursorColor: Colors.blueAccent,
-                    controller: emailController,
+                    controller: controller.emailController,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -68,7 +62,7 @@ class LoginForm extends StatelessWidget {
                   child: TextFormField(
                     obscureText: true,
                     cursorColor: Colors.blueAccent,
-                    controller: passwordController,
+                    controller: controller.passwordController,
                     textAlignVertical: TextAlignVertical.center,
                     decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(

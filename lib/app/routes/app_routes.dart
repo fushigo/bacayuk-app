@@ -8,6 +8,7 @@ abstract class Routes {
   static const LOGIN = _Paths.LOGIN;
   static const WELCOME = _Paths.WELCOME;
   static const REGISTER = _Paths.REGISTER;
+  static const OTP = _Paths.OTP;
 }
 
 abstract class _Paths {
@@ -17,4 +18,5 @@ abstract class _Paths {
   static const LOGIN = '/login';
   static const WELCOME = '/welcome';
   static const REGISTER = '/register';
+  static const OTP = '/otp';
 }
