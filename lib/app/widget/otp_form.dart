@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class OtpForm extends GetView<OtpController> {
-  const OtpForm({super.key, required this.textEditingController, required this.first, required this.last});
+  const OtpForm(
+      {super.key,
+      required this.textEditingController,
+      required this.first,
+      required this.last});
 
   final bool first;
   final bool last;
@@ -22,26 +26,22 @@ class OtpForm extends GetView<OtpController> {
           counterText: "",
           border: OutlineInputBorder(
               borderSide: const BorderSide(width: 2),
-            borderRadius: BorderRadius.circular(10)
-          ),
+              borderRadius: BorderRadius.circular(10)),
         ),
         autofocus: true,
         maxLength: 1,
         style: const TextStyle(
-            fontFamily: "Poppins",
-            fontSize: 24,
-            fontWeight: FontWeight.bold
-        ),
+            fontFamily: "Poppins", fontSize: 24, fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
         controller: textEditingController,
         onChanged: (value) {
-          if(value.length == 1 && last == false){
+          if (value.length == 1 && last == false) {
             FocusScope.of(context).nextFocus();
           }
-          if(value.isEmpty && first == false){
+          if (value.isEmpty && first == false) {
             FocusScope.of(context).previousFocus();
           }
-          if(value.length == 1 && last == true) {
+          if (value.length == 1 && last == true) {
             controller.maxValue.value = !controller.maxValue.value;
           }
         },

@@ -9,6 +9,7 @@ abstract class Routes {
   static const WELCOME = _Paths.WELCOME;
   static const REGISTER = _Paths.REGISTER;
   static const OTP = _Paths.OTP;
+  static const COMPLETED_PROFILE = _Paths.COMPLETED_PROFILE;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const WELCOME = '/welcome';
   static const REGISTER = '/register';
   static const OTP = '/otp';
+  static const COMPLETED_PROFILE = '/completed-profile';
 }

@@ -1,7 +1,6 @@
 import 'package:bacayuk/app/modules/register/controllers/register_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/state_manager.dart';
-import 'package:get_storage/get_storage.dart';
 
 class RegisterForm extends GetView<RegisterController> {
   const RegisterForm({super.key});
@@ -22,9 +21,7 @@ class RegisterForm extends GetView<RegisterController> {
                 const Text(
                   "Username",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontFamily: "Poppins"),
                 ),
                 const SizedBox(
                   height: 10,
@@ -57,9 +54,7 @@ class RegisterForm extends GetView<RegisterController> {
                 const Text(
                   "Email",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontFamily: "Poppins"),
                 ),
                 const SizedBox(
                   height: 10,
@@ -92,9 +87,7 @@ class RegisterForm extends GetView<RegisterController> {
                 const Text(
                   "Password",
                   textAlign: TextAlign.start,
-                  style: TextStyle(
-                    fontFamily: "Poppins"
-                  ),
+                  style: TextStyle(fontFamily: "Poppins"),
                 ),
                 const SizedBox(
                   height: 10,
@@ -131,32 +124,33 @@ class RegisterForm extends GetView<RegisterController> {
                     Transform.scale(
                       scale: 1.3,
                       child: Checkbox(
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(3)),
                         checkColor: Colors.white,
                         activeColor: Colors.blue.shade900,
                         value: controller.checkBoxValue.value,
                         onChanged: (value) {
-                          value ?? true ? controller.checkBoxValue.value = true : controller.checkBoxValue.value = false;
+                          value ?? true
+                              ? controller.checkBoxValue.value = true
+                              : controller.checkBoxValue.value = false;
                         },
                       ),
                     ),
                     RichText(
                       textAlign: TextAlign.start,
                       text: TextSpan(
-                        style: const TextStyle(color: Colors.black),
-                        children: [
-                          const TextSpan(text: "Agree with "),
-                          TextSpan(text: "Terms & Condition", style: TextStyle(
-                            color: Colors.blue.shade900,
-                            fontFamily: "Poppins"
-                          ))
-                        ]
-                      ),
+                          style: const TextStyle(color: Colors.black),
+                          children: [
+                            const TextSpan(text: "Agree with "),
+                            TextSpan(
+                                text: "Terms & Condition",
+                                style: TextStyle(
+                                    color: Colors.blue.shade900,
+                                    fontFamily: "Poppins"))
+                          ]),
                     )
                   ],
-                ) 
-            )
-            ),
+                ))),
           ],
         ),
       ),

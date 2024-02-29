@@ -38,22 +38,21 @@ class OtpController extends GetxController {
   verify() async {
     String paylaoad =
         "${otentication1.text.toString()}${otentication2.text.toString()}${otentication3.text.toString()}${otentication4.text.toString()}";
-    try{
-      final response  = await ApiProvider.instance().post(Endpoint.otp,
-      data: ({
-        "token": StorageProvider.read(StorageKey.authtoken),
-        "code": int.parse(paylaoad)
-      }));
-      if(response.statusCode == 200){
+    try {
+      final response = await ApiProvider.instance().post(Endpoint.otp,
+          data: ({
+            "token": StorageProvider.read(StorageKey.authtoken),
+            "code": int.parse(paylaoad)
+          }));
+      if (response.statusCode == 200) {
         ResponseOtp responseOtp = ResponseOtp.fromJson(response.data);
         await StorageProvider.write(StorageKey.token, responseOtp.token!);
-        await StorageProvider.write(StorageKey.status, "logged");
         Get.offAllNamed(Routes.HOME);
-      }else{
+      } else {
         Get.snackbar("Sorry", "Verifikasi gagal");
       }
-    }catch(e){
-      Get.snackbar("Eror", "${e}");
+    } catch (e) {
+      Get.snackbar("Eror", "$e");
     }
   }
 }

@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/completed_profile/bindings/completed_profile_binding.dart';
+import '../modules/completed_profile/views/completed_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/login/bindings/login_binding.dart';
@@ -50,6 +52,11 @@ class AppPages {
       name: _Paths.OTP,
       page: () => const OtpView(),
       binding: OtpBinding(),
+    ),
+    GetPage(
+      name: _Paths.COMPLETED_PROFILE,
+      page: () => const CompletedProfileView(),
+      binding: CompletedProfileBinding(),
     ),
   ];
 }

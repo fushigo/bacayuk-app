@@ -34,7 +34,7 @@ class RegisterController extends GetxController {
     super.onClose();
   }
 
-  void onToggle(){
+  void onToggle() {
     checkBoxValue.value = !checkBoxValue.value;
     update();
   }
@@ -57,11 +57,11 @@ class RegisterController extends GetxController {
         if (response.statusCode == 200) {
           final result = ResponseRegister.fromJson(response.data);
           await StorageProvider.write(StorageKey.authtoken, result.token!);
-          Get.toNamed(Routes.OTP, parameters: {
-            'email': emailController.text.toString()
-          });
+          Get.toNamed(Routes.OTP,
+              parameters: {'email': emailController.text.toString()});
         } else {
-          Get.snackbar("Sorry", "Registrasi gagal", backgroundColor: Colors.blue);
+          Get.snackbar("Sorry", "Registrasi gagal",
+              backgroundColor: Colors.blue);
         }
       }
       loading(false);

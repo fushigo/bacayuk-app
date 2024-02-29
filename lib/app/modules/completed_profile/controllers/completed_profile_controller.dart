@@ -1,7 +1,7 @@
 import 'package:get/get.dart';
 
-class WelcomeController extends GetxController {
-  //TODO: Implement WelcomeController
+class CompletedProfileController extends GetxController {
+  //TODO: Implement CompletedProfileController
 
   final count = 0.obs;
   @override
