@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
 class ButtonWidget extends StatelessWidget {
@@ -23,8 +24,10 @@ class ButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: const TextStyle(
-            color: Colors.white, fontFamily: "Poppins", fontSize: 16),
+        style: TextStyle(
+            color: Colors.white,
+            fontFamily: "Poppins",
+            fontSize: GlobalVariable.textlg),
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
 class InlineTextWidget extends StatelessWidget {
@@ -18,20 +19,20 @@ class InlineTextWidget extends StatelessWidget {
       children: [
         Text(
           text,
-          style: const TextStyle(
+          style: TextStyle(
             color: Colors.black,
             fontFamily: "Poppins",
-            fontSize: 14,
+            fontSize: GlobalVariable.textmd,
           ),
         ),
         TextButton(
             onPressed: onPressed,
             child: Text(
               textButton,
-              style: const TextStyle(
+              style: TextStyle(
                   color: Colors.blueAccent,
                   fontFamily: "Poppins",
-                  fontSize: 14),
+                  fontSize: GlobalVariable.textmd),
             ))
       ],
     );

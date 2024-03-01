@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/widget/login_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
@@ -24,7 +25,7 @@ class LoginView extends GetView<LoginController> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 80,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,9 +35,9 @@ class LoginView extends GetView<LoginController> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontFamily: "Poppins",
-                          fontSize: 24),
+                          fontSize: GlobalVariable.heading_1),
                     ),
-                    Text(
+                    const Text(
                       "Hi Welcome back, you've been missed",
                       style: TextStyle(
                           fontFamily: "Poppins", fontWeight: FontWeight.w200),
@@ -63,10 +64,11 @@ class LoginView extends GetView<LoginController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               "Don’t have an account? ",
                               style: TextStyle(
-                                  fontFamily: "Poppins", fontSize: 14),
+                                  fontFamily: "Poppins",
+                                  fontSize: GlobalVariable.textmd),
                             ),
                             const SizedBox(
                               width: 10,
@@ -75,12 +77,12 @@ class LoginView extends GetView<LoginController> {
                               onTap: () {
                                 Get.offAllNamed(Routes.REGISTER);
                               },
-                              child: const Text(
+                              child: Text(
                                 "Sign Up",
                                 style: TextStyle(
                                     color: Colors.blueAccent,
                                     fontFamily: "Poppins",
-                                    fontSize: 14),
+                                    fontSize: GlobalVariable.textmd),
                               ),
                             )
                           ],
@@ -97,10 +99,10 @@ class LoginView extends GetView<LoginController> {
                     width: 70,
                     color: Colors.grey,
                   ),
-                  const Text(
+                  Text(
                     "Or signin with",
                     style: TextStyle(
-                        fontSize: 12,
+                        fontSize: GlobalVariable.textbase,
                         color: Colors.grey,
                         fontFamily: "Poppins"),
                   ),

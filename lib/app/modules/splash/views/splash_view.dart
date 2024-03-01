@@ -1,4 +1,5 @@
 import 'package:another_flutter_splash_screen/another_flutter_splash_screen.dart';
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -13,6 +14,7 @@ class SplashView extends GetView<SplashController> {
       body: Center(
           child: FlutterSplashScreen.scale(
         onEnd: () {
+          // controller.checkInternetConnection();
           controller.checkSession();
         },
         gradient: LinearGradient(
@@ -24,6 +26,7 @@ class SplashView extends GetView<SplashController> {
             ]),
         childWidget: Container(
           alignment: Alignment.center,
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -36,12 +39,12 @@ class SplashView extends GetView<SplashController> {
                     const SizedBox(
                       height: 10,
                     ),
-                    const Text(
+                    Text(
                       "Bersama Bacayuk memudahkan akses dalam mencari pengetahuan",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: "Poppins",
-                          fontSize: 16,
+                          fontSize: GlobalVariable.textmd,
                           color: Colors.white),
                     ),
                   ],

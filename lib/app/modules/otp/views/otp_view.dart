@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/widget/otp_form.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
 import 'package:flutter/material.dart';
@@ -32,19 +33,20 @@ class OtpView extends GetView<OtpController> {
             SizedBox(
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     "Verify Code",
                     style: TextStyle(
                         fontFamily: "Poppins",
-                        fontSize: 28,
+                        fontSize: GlobalVariable.heading_1,
                         fontWeight: FontWeight.bold),
                   ),
                   const SizedBox(
                     height: 10,
                   ),
-                  const Text(
+                  Text(
                     "Please enter code we just sent to email",
-                    style: TextStyle(fontFamily: "Poppins", fontSize: 16),
+                    style: TextStyle(
+                        fontFamily: "Poppins", fontSize: GlobalVariable.textlg),
                   ),
                   Text(
                     controller.email.toString(),
@@ -87,20 +89,28 @@ class OtpView extends GetView<OtpController> {
             SizedBox(
               child: Column(
                 children: [
-                  const Text(
+                  Text(
                     "Didn't receive OTP?",
-                    style: TextStyle(fontFamily: "Poppins", fontSize: 16),
+                    style: TextStyle(
+                        fontFamily: "Poppins", fontSize: GlobalVariable.textlg),
                   ),
-                  InkWell(
-                    onTap: () {},
-                    child: Text(
-                      "Resend code",
-                      style: TextStyle(
-                          color: Colors.blue.shade900,
-                          fontFamily: "Poppins",
-                          fontSize: 16),
-                    ),
-                  )
+                  Obx(() => InkWell(
+                        onTap: controller.isTimerRunning.value
+                            ? null
+                            : () {
+                                controller.verify();
+                                controller.resetTimer();
+                              },
+                        child: Obx(() => Text(
+                              controller.isTimerRunning.value
+                                  ? "Resend code after ${controller.seconds}"
+                                  : "Resend code",
+                              style: TextStyle(
+                                  color: Colors.blue.shade900,
+                                  fontFamily: "Poppins",
+                                  fontSize: GlobalVariable.textmd),
+                            )),
+                      ))
                 ],
               ),
             ),

@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/otp/controllers/otp_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,8 +31,10 @@ class OtpForm extends GetView<OtpController> {
         ),
         autofocus: true,
         maxLength: 1,
-        style: const TextStyle(
-            fontFamily: "Poppins", fontSize: 24, fontWeight: FontWeight.bold),
+        style: TextStyle(
+            fontFamily: "Poppins",
+            fontSize: GlobalVariable.heading_2,
+            fontWeight: FontWeight.bold),
         textAlign: TextAlign.center,
         controller: textEditingController,
         onChanged: (value) {
