@@ -4,4 +4,5 @@ class GlobalVariable {
   static double textbase = 12;
   static double textmd = 14;
   static double textlg = 16;
+  static String fontPoppins = "Poppins";
 }

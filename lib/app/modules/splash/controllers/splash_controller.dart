@@ -51,22 +51,28 @@ class SplashController extends GetxController {
   void checkSession() async {
     String token = StorageProvider.read(StorageKey.token);
     String status = StorageProvider.read(StorageKey.status);
+    final profileStatus = StorageProvider.read(StorageKey.profileStatus);
+    final emailStatus = StorageProvider.read(StorageKey.status);
 
-    if (status == "logged") {
-      try {
-        final response = await ApiProvider.instance()
-            .get(Endpoint.validasi, queryParameters: {"session": token});
-
-        if (response.statusCode == 200) {
-          return Get.offAllNamed(Routes.HOME);
-        } else {
-          return Get.offAllNamed(Routes.LOGIN);
-        }
-      } catch (e) {
-        return SnackBarWidget.snackBarError("Error : ${e.toString()}");
-      }
+    if (profileStatus == "uncomplete" || emailStatus == "unverify") {
+      Get.offAllNamed(Routes.WELCOME);
     } else {
-      return Get.offAllNamed(Routes.WELCOME);
+      if (status == "logged") {
+        try {
+          final response = await ApiProvider.instance()
+              .get(Endpoint.validasi, queryParameters: {"session": token});
+
+          if (response.statusCode == 200) {
+            return Get.offAllNamed(Routes.HOME);
+          } else {
+            return Get.offAllNamed(Routes.LOGIN);
+          }
+        } catch (e) {
+          return SnackBarWidget.snackBarError("Error : ${e.toString()}");
+        }
+      } else {
+        return Get.offAllNamed(Routes.WELCOME);
+      }
     }
   }
 }

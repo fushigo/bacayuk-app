@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bacayuk/app/data/constant/endpoint.dart';
+import 'package:bacayuk/app/data/model/response_generate_otp.dart';
 import 'package:bacayuk/app/data/model/response_otp.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
@@ -63,6 +64,22 @@ class OtpController extends GetxController {
     startTimer();
   }
 
+  resendotp() async {
+    try {
+      final response = await ApiProvider.instance()
+          .get(Endpoint.otp, queryParameters: {"email": email});
+
+      if (response.statusCode == 200) {
+        final result = ResponseGenerateOtp.fromJson(response.data);
+        await StorageProvider.write(StorageKey.authtoken, result.token!);
+        SnackBarWidget.snackBarSuccess(
+            "Verification code has been sent to your email");
+      }
+    } catch (e) {
+      SnackBarWidget.snackBarError("Something went wrong. ${e.toString()}");
+    }
+  }
+
   verify() async {
     String paylaoad =
         "${otentication1.text.toString()}${otentication2.text.toString()}${otentication3.text.toString()}${otentication4.text.toString()}";
@@ -75,6 +92,7 @@ class OtpController extends GetxController {
       if (response.statusCode == 200) {
         ResponseOtp responseOtp = ResponseOtp.fromJson(response.data);
         await StorageProvider.write(StorageKey.token, responseOtp.token!);
+        await StorageProvider.write(StorageKey.status, "logged");
         Get.offAllNamed(Routes.COMPLETED_PROFILE);
       } else {
         SnackBarWidget.snackBarError(

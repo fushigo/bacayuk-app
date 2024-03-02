@@ -76,6 +76,8 @@ class RegisterController extends GetxController {
         if (response.statusCode == 200) {
           final result = ResponseRegister.fromJson(response.data);
           await StorageProvider.write(StorageKey.authtoken, result.token!);
+          await StorageProvider.write(StorageKey.status, "unverify");
+          await StorageProvider.write(StorageKey.profileStatus, "uncomplete");
           Get.toNamed(Routes.OTP,
               parameters: {'email': emailController.text.toString()});
         } else {

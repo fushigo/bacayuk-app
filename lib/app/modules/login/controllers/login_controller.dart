@@ -7,8 +7,6 @@ import 'package:bacayuk/app/widget/snackbar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:top_snackbar_flutter/custom_snack_bar.dart';
-import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 class LoginController extends GetxController {
   //TODO: Implement LoginController
@@ -39,8 +37,7 @@ class LoginController extends GetxController {
   void increment() => count.value++;
 
   login() async {
-    if (emailController.text.isEmpty ||
-        emailController.text.trim() == "") {
+    if (emailController.text.isEmpty || emailController.text.trim() == "") {
       return SnackBarWidget.snackBarInfo("Email cannot be empty");
     } else if (!GetUtils.isEmail(emailController.text)) {
       return SnackBarWidget.snackBarInfo("Invalid email format");
@@ -50,6 +47,15 @@ class LoginController extends GetxController {
     }
 
     try {
+      final profileStatus = StorageProvider.read(StorageKey.profileStatus);
+      final emailStatus = StorageProvider.read(StorageKey.status);
+      if (profileStatus == "uncomplete") {
+        return Get.toNamed(Routes.COMPLETED_PROFILE);
+      } else if (emailStatus == "unverify") {
+        return Get.toNamed(Routes.OTP,
+            parameters: {"email": emailController.text.toString()});
+      }
+
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
 

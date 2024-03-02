@@ -98,7 +98,7 @@ class OtpView extends GetView<OtpController> {
                         onTap: controller.isTimerRunning.value
                             ? null
                             : () {
-                                controller.verify();
+                                controller.resendotp();
                                 controller.resetTimer();
                               },
                         child: Obx(() => Text(
@@ -106,7 +106,9 @@ class OtpView extends GetView<OtpController> {
                                   ? "Resend code after ${controller.seconds}"
                                   : "Resend code",
                               style: TextStyle(
-                                  color: Colors.blue.shade900,
+                                  color: controller.isTimerRunning.value
+                                      ? Colors.grey
+                                      : Colors.blue.shade900,
                                   fontFamily: "Poppins",
                                   fontSize: GlobalVariable.textmd),
                             )),
