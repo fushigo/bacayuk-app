@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/widget/register_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
@@ -24,7 +25,7 @@ class RegisterView extends GetView<RegisterController> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const SizedBox(
+              SizedBox(
                 height: 90,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,9 +35,9 @@ class RegisterView extends GetView<RegisterController> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontFamily: "Poppins",
-                          fontSize: 24),
+                          fontSize: GlobalVariable.heading_1),
                     ),
-                    Text(
+                    const Text(
                       "Fill your information below or register \n with your social account",
                       textAlign: TextAlign.center,
                       style: TextStyle(
@@ -64,10 +65,11 @@ class RegisterView extends GetView<RegisterController> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            const Text(
+                            Text(
                               "Already have an account?",
                               style: TextStyle(
-                                  fontFamily: "Poppins", fontSize: 14),
+                                  fontFamily: "Poppins",
+                                  fontSize: GlobalVariable.textmd),
                             ),
                             const SizedBox(
                               width: 10,
@@ -76,12 +78,12 @@ class RegisterView extends GetView<RegisterController> {
                               onTap: () {
                                 Get.offAllNamed(Routes.LOGIN);
                               },
-                              child: const Text(
+                              child: Text(
                                 "Sign In",
                                 style: TextStyle(
                                     color: Colors.blueAccent,
                                     fontFamily: "Poppins",
-                                    fontSize: 14),
+                                    fontSize: GlobalVariable.textmd),
                               ),
                             )
                           ],
@@ -98,10 +100,10 @@ class RegisterView extends GetView<RegisterController> {
                     width: 70,
                     color: Colors.grey,
                   ),
-                  const Text(
+                  Text(
                     "Or signup with",
                     style: TextStyle(
-                        fontSize: 12,
+                        fontSize: GlobalVariable.textbase,
                         color: Colors.grey,
                         fontFamily: "Poppins"),
                   ),

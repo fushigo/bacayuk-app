@@ -1,7 +1,3 @@
-import 'dart:developer';
-
-import 'package:bacayuk/app/data/provider/storage_provider.dart';
-import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:get/get.dart';
 
 class WelcomeController extends GetxController {

@@ -22,6 +22,8 @@ class StorageKey {
   static const String status = "status";
   static const String authtoken = "authtoken";
   static const String token = "token";
+  static const String profileStatus = "profileStatus";
+  static const String userId = "userId";
 }
 
 // class StorageProvider {

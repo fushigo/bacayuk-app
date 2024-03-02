@@ -3,6 +3,7 @@ import 'package:bacayuk/app/data/model/response_register.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
+import 'package:bacayuk/app/widget/snackbar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,7 @@ class RegisterController extends GetxController {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
+  final obsecureText = true.obs;
   final checkBoxValue = false.obs;
 
   final count = 0.obs;
@@ -34,7 +36,7 @@ class RegisterController extends GetxController {
     super.onClose();
   }
 
-  void onToggle(){
+  void onToggle() {
     checkBoxValue.value = !checkBoxValue.value;
     update();
   }
@@ -42,6 +44,23 @@ class RegisterController extends GetxController {
   void increment() => count.value++;
 
   register() async {
+    if (usernameController.text.isEmpty ||
+        usernameController.text.trim() == "" ||
+        usernameController.text.length < 5) {
+      return SnackBarWidget.snackBarInfo(
+          "Username cannot be empty & must have 5 characters");
+    } else if (!GetUtils.isEmail(emailController.text)) {
+      return SnackBarWidget.snackBarInfo("Invalid email format");
+    } else if (passwordController.text.isEmpty ||
+        passwordController.text.trim() == "" ||
+        passwordController.text.length < 8) {
+      return SnackBarWidget.snackBarInfo(
+          "Password cannot be empty & must have 8 characters");
+    } else if (checkBoxValue.value != true) {
+      return SnackBarWidget.snackBarInfo(
+          "Please Agree with Terms & Conditions");
+    }
+
     try {
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
@@ -57,11 +76,13 @@ class RegisterController extends GetxController {
         if (response.statusCode == 200) {
           final result = ResponseRegister.fromJson(response.data);
           await StorageProvider.write(StorageKey.authtoken, result.token!);
-          Get.toNamed(Routes.OTP, parameters: {
-            'email': emailController.text.toString()
-          });
+          await StorageProvider.write(StorageKey.status, "unverify");
+          await StorageProvider.write(StorageKey.profileStatus, "uncomplete");
+          Get.toNamed(Routes.OTP,
+              parameters: {'email': emailController.text.toString()});
         } else {
-          Get.snackbar("Sorry", "Registrasi gagal", backgroundColor: Colors.blue);
+          SnackBarWidget.snackBarError(
+              "Something went wrong. Please check your credentials and try again");
         }
       }
       loading(false);
@@ -69,15 +90,17 @@ class RegisterController extends GetxController {
       loading(false);
       if (e.response != null) {
         if (e.response?.data != null) {
-          Get.snackbar("Sorry", "${e.response?.data['message']}",
-              backgroundColor: Colors.red);
+          final errorResponse = e.response?.data['message'] ??
+              "Please check your credentials and try again";
+          SnackBarWidget.snackBarError("Something went wrong. $errorResponse");
         }
       } else {
-        Get.snackbar("Sorry", e.message ?? "", backgroundColor: Colors.red);
+        SnackBarWidget.snackBarError(
+            "Something went wrong. ${e.message ?? ""}");
       }
     } catch (e) {
       loading(false);
-      Get.snackbar("Error", e.toString(), backgroundColor: Colors.red);
+      SnackBarWidget.snackBarError("Something went wrong. ${e.toString()}");
     }
   }
 }

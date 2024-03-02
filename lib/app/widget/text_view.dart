@@ -1,3 +1,4 @@
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
 class TextView extends StatelessWidget {
@@ -9,13 +10,13 @@ class TextView extends StatelessWidget {
       children: [
         RichText(
           textAlign: TextAlign.center,
-          text: const TextSpan(
+          text: TextSpan(
               style: TextStyle(
                   fontFamily: "Poppins",
                   color: Colors.black,
-                  fontSize: 20,
+                  fontSize: GlobalVariable.heading_2,
                   fontWeight: FontWeight.bold),
-              children: [
+              children: const [
                 TextSpan(text: "Selamat datang di "),
                 TextSpan(
                     text: "Baca Yuk! \n",
@@ -26,12 +27,12 @@ class TextView extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const Text(
+        Text(
           "Jelajahi keajaiban literasi digital dan Temukan \n cerita tak terbatas di ujung jari anda. Selamat \n menikmati petualangan membaca!",
           textAlign: TextAlign.center,
           style: TextStyle(
               fontFamily: "Poppins",
-              fontSize: 12,
+              fontSize: GlobalVariable.textbase,
               fontWeight: FontWeight.normal),
         )
       ],
