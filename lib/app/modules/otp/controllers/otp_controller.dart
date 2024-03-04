@@ -14,7 +14,7 @@ class OtpController extends GetxController {
   //TODO: Implement OtpController
 
   late Timer _timer;
-  var _start = 60.obs;
+  final _start = 60.obs;
   var isTimerRunning = false.obs;
 
   final String email = Get.parameters['email'] ?? "No have email";
@@ -32,10 +32,6 @@ class OtpController extends GetxController {
     startTimer();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
   @override
   void onClose() {
@@ -47,7 +43,7 @@ class OtpController extends GetxController {
 
   void startTimer() {
     isTimerRunning.value = true;
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (_start.value == 0) {
         timer.cancel();
         isTimerRunning.value = false;

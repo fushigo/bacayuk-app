@@ -1,4 +1,5 @@
 import 'package:bacayuk/app/data/constant/global.dart';
+import 'package:bacayuk/app/modules/login/controllers/login_controller.dart';
 import 'package:bacayuk/app/widget/login_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
@@ -7,15 +8,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/login_controller.dart';
-
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -54,7 +55,7 @@ class LoginView extends GetView<LoginController> {
                         controller.login();
                       },
                       text: "Sign In",
-                      horizontal: 150,
+                      horizontal: 110,
                       vertical: 12.00,
                     ),
                     Container(

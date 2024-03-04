@@ -9,7 +9,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 360,
+      height: 350,
       child: Form(
         key: controller.formKey,
         child: Column(
@@ -19,10 +19,13 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
+                maxLength: 30,
                 cursorColor: Colors.blueAccent,
                 controller: controller.namalengkapController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                    counterText: "",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
@@ -41,6 +44,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
                 cursorColor: Colors.blueAccent,
                 controller: controller.bioController,
                 textAlignVertical: TextAlignVertical.center,
@@ -63,10 +67,13 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
+                maxLength: 10,
                 cursorColor: Colors.blueAccent,
                 controller: controller.tanggallahirController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                    counterText: "",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
@@ -117,6 +124,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
                 cursorColor: Colors.blueAccent,
                 controller: controller.alamatController,
                 textAlignVertical: TextAlignVertical.center,

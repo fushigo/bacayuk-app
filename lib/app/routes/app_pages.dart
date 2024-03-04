@@ -1,5 +1,7 @@
 import 'package:get/get.dart';
 
+import '../modules/boarding/bindings/boarding_binding.dart';
+import '../modules/boarding/views/boarding_view.dart';
 import '../modules/completed_profile/bindings/completed_profile_binding.dart';
 import '../modules/completed_profile/views/completed_profile_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -20,7 +22,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.SPLASH;
+  static const INITIAL = Routes.REGISTER;
 
   static final routes = [
     GetPage(
@@ -57,6 +59,11 @@ class AppPages {
       name: _Paths.COMPLETED_PROFILE,
       page: () => const CompletedProfileView(),
       binding: CompletedProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOARDING,
+      page: () => const BoardingView(),
+      binding: BoardingBinding(),
     ),
   ];
 }

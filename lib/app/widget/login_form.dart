@@ -10,7 +10,7 @@ class LoginForm extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: 170,
       child: Form(
         key: controller.formKey,
         child: Column(
@@ -20,10 +20,13 @@ class LoginForm extends GetView<LoginController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
+                maxLength: 30,
                 cursorColor: Colors.blueAccent,
                 controller: controller.emailController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                    counterText: "",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
@@ -41,13 +44,16 @@ class LoginForm extends GetView<LoginController> {
             ),
             Obx(
               () => SizedBox(
-                height: 50,
+                height: 45,
                 child: TextFormField(
+                  maxLength: 50,
+                  maxLines: 1,
                   obscureText: controller.obsecureText.value,
                   cursorColor: Colors.blueAccent,
                   controller: controller.passwordController,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
+                      counterText: "",
                       suffixIcon: IconButton(
                         onPressed: () {
                           controller.obsecureText.value =

@@ -8,7 +8,6 @@ import 'package:bacayuk/app/data/provider/jwt_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/snackbar.dart';
-import 'package:dio/dio.dart' as dio;
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -33,20 +32,6 @@ class CompletedProfileController extends GetxController {
   String selectedItem = "Other";
 
   final count = 0.obs;
-  @override
-  void onInit() {
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   void increment() => count.value++;
 
@@ -91,17 +76,6 @@ class CompletedProfileController extends GetxController {
       final decodedToken = await JwtConverter.jwtDecode(token);
       String userId = decodedToken["id"].toString();
 
-      final responseProfile =
-          await ApiProvider.instance().post(Endpoint.profile,
-              data: ({
-                "jenisKelamin": selectedItem.toLowerCase(),
-                "tanggalLahir": tanggallahirController.text.toString(),
-                "gambar": profilePict,
-                "bio": bioController.text.toString()
-              }),
-              queryParameters: {"uid": userId},
-              options: Options(headers: {"authorization": "Bearer $token"}));
-
       final responseUser = await ApiProvider.instance().patch(Endpoint.user,
           data: ({
             "namaLengkap": namalengkapController.text.toString(),
@@ -110,11 +84,25 @@ class CompletedProfileController extends GetxController {
           queryParameters: {"uid": userId},
           options: Options(headers: {"authorization": "Bearer $token"}));
 
-      if (responseUser.statusCode == 200 && responseProfile.statusCode == 201) {
-        await StorageProvider.write(StorageKey.profileStatus, "completed");
-        Get.offAllNamed(Routes.HOME);
-      } else {
-        SnackBarWidget.snackBarError("Something went wrong. Please try again");
+      if (responseUser.statusCode == 200) {
+        final responseProfile =
+            await ApiProvider.instance().post(Endpoint.profile,
+                data: ({
+                  "jenisKelamin": selectedItem.toLowerCase(),
+                  "tanggalLahir": tanggallahirController.text.toString(),
+                  "gambar": profilePict,
+                  "bio": bioController.text.toString()
+                }),
+                queryParameters: {"uid": userId},
+                options: Options(headers: {"authorization": "Bearer $token"}));
+
+        if (responseProfile.statusCode == 201) {
+          await StorageProvider.write(StorageKey.profileStatus, "completed");
+          Get.offAllNamed(Routes.BOARDING);
+        } else {
+          SnackBarWidget.snackBarError(
+              "Something went wrong. Please try again");
+        }
       }
     } on DioException catch (e) {
       log(e.requestOptions.headers.toString());

@@ -1,6 +1,5 @@
+import 'package:bacayuk/app/modules/completed_profile/controllers/completed_profile_controller.dart';
 import 'package:get/get.dart';
-
-import '../controllers/completed_profile_controller.dart';
 
 class CompletedProfileBinding extends Bindings {
   @override

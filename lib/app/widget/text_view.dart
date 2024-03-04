@@ -14,7 +14,7 @@ class TextView extends StatelessWidget {
               style: TextStyle(
                   fontFamily: "Poppins",
                   color: Colors.black,
-                  fontSize: GlobalVariable.heading_2,
+                  fontSize: GlobalVariable.heading_3,
                   fontWeight: FontWeight.bold),
               children: const [
                 TextSpan(text: "Selamat datang di "),

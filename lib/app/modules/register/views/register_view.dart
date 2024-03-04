@@ -1,4 +1,5 @@
 import 'package:bacayuk/app/data/constant/global.dart';
+import 'package:bacayuk/app/modules/register/controllers/register_controller.dart';
 import 'package:bacayuk/app/widget/register_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
@@ -7,15 +8,15 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-import '../controllers/register_controller.dart';
-
 class RegisterView extends GetView<RegisterController> {
   const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
         child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
@@ -55,7 +56,7 @@ class RegisterView extends GetView<RegisterController> {
                         controller.register();
                       },
                       text: "Sign Up",
-                      horizontal: 150,
+                      horizontal: 110,
                       vertical: 12.00,
                     ),
                     Container(

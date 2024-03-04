@@ -18,15 +18,7 @@ class SplashController extends GetxController {
     checkInternetConnection();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
-  }
 
-  @override
-  void onClose() {
-    super.onClose();
-  }
 
   Future<void> checkInternetConnection() async {
     try {
