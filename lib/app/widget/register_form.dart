@@ -9,7 +9,7 @@ class RegisterForm extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 300,
+      height: 270,
       child: Form(
         key: controller.formKey,
         child: Column(
@@ -19,10 +19,13 @@ class RegisterForm extends GetView<RegisterController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
+                maxLength: 16,
                 cursorColor: Colors.blueAccent,
                 controller: controller.usernameController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                    counterText: "",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
@@ -41,10 +44,13 @@ class RegisterForm extends GetView<RegisterController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                maxLines: 1,
+                maxLength: 30,
                 cursorColor: Colors.blueAccent,
                 controller: controller.emailController,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
+                    counterText: "",
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
@@ -64,11 +70,14 @@ class RegisterForm extends GetView<RegisterController> {
               () => SizedBox(
                 height: 50,
                 child: TextFormField(
+                  maxLines: 1,
+                  maxLength: 16,
                   obscureText: controller.obsecureText.value,
                   cursorColor: Colors.blueAccent,
                   controller: controller.passwordController,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(
+                    counterText: "",
                       suffixIcon: IconButton(
                         onPressed: () {
                           controller.obsecureText.value =

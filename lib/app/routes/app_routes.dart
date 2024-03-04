@@ -10,6 +10,7 @@ abstract class Routes {
   static const REGISTER = _Paths.REGISTER;
   static const OTP = _Paths.OTP;
   static const COMPLETED_PROFILE = _Paths.COMPLETED_PROFILE;
+  static const BOARDING = _Paths.BOARDING;
 }
 
 abstract class _Paths {
@@ -21,4 +22,5 @@ abstract class _Paths {
   static const REGISTER = '/register';
   static const OTP = '/otp';
   static const COMPLETED_PROFILE = '/completed-profile';
+  static const BOARDING = '/boarding';
 }

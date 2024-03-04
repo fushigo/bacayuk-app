@@ -1,3 +1,5 @@
+import 'package:bacayuk/app/data/constant/global.dart';
+import 'package:bacayuk/app/modules/welcome/controllers/welcome_controller.dart';
 import 'package:bacayuk/app/widget/text_view.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/inline_text.dart';
@@ -7,13 +9,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-import '../controllers/welcome_controller.dart';
-
 class WelcomeView extends GetView<WelcomeController> {
   const WelcomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    GlobalOrientation.orientationPotrait();
     return Scaffold(
       body: SafeArea(
           child: Container(
@@ -25,8 +26,8 @@ class WelcomeView extends GetView<WelcomeController> {
             Column(
               children: [
                 SizedBox(
-                  child: LottieBuilder.network(
-                    "https://lottie.host/378ea747-f808-4321-ba66-b83ce48eaddf/1STFCBGvab.json",
+                  child: LottieBuilder.asset(
+                    "asset/json/welcome.json",
                     width: 300,
                     height: 300,
                   ),
