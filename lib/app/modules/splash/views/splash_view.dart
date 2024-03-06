@@ -13,8 +13,10 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: Center(
           child: FlutterSplashScreen.scale(
-        onEnd: () {
+        onEnd: () async {
           // controller.checkInternetConnection();
+          controller.checkPermission();
+          await controller.checkInternetConnection();
           controller.checkSession();
         },
         gradient: LinearGradient(
