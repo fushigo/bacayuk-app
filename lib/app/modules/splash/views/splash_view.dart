@@ -13,8 +13,10 @@ class SplashView extends GetView<SplashController> {
     return Scaffold(
       body: Center(
           child: FlutterSplashScreen.scale(
-        onEnd: () {
+        onEnd: () async {
           // controller.checkInternetConnection();
+          await controller.checkPermission();
+          await controller.checkInternetConnection();
           controller.checkSession();
         },
         gradient: LinearGradient(
@@ -31,7 +33,7 @@ class SplashView extends GetView<SplashController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 700,
+                height: 600,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

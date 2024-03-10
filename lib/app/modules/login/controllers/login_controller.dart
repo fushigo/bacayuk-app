@@ -37,12 +37,6 @@ class LoginController extends GetxController {
     try {
       final profileStatus = StorageProvider.read(StorageKey.profileStatus);
       final emailStatus = StorageProvider.read(StorageKey.status);
-      if (profileStatus == "uncomplete") {
-        return Get.toNamed(Routes.COMPLETED_PROFILE);
-      } else if (emailStatus == "unverify") {
-        return Get.toNamed(Routes.OTP,
-            parameters: {"email": emailController.text.toString()});
-      }
 
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
@@ -55,10 +49,17 @@ class LoginController extends GetxController {
             }));
 
         if (response.statusCode == 200) {
-          final result = ResponseLogin.fromJson(response.data);
-          await StorageProvider.write(StorageKey.status, "logged");
-          await StorageProvider.write(StorageKey.token, result.token!);
-          Get.offAllNamed(Routes.HOME);
+          if (profileStatus == "uncomplete") {
+            return Get.toNamed(Routes.COMPLETED_PROFILE);
+          } else if (emailStatus == "unverify") {
+            return Get.toNamed(Routes.OTP,
+                parameters: {"email": emailController.text.toString()});
+          }else{
+            final result = ResponseLogin.fromJson(response.data);
+            await StorageProvider.write(StorageKey.status, "logged");
+            await StorageProvider.write(StorageKey.token, result.token!);
+            Get.offAllNamed(Routes.HOME);
+          }
         } else {
           SnackBarWidget.snackBarError(
               "Something went wrong. Please check your credentials and try again");

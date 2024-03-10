@@ -47,9 +47,10 @@ class OtpView extends GetView<OtpController> {
                     ),
                     Text(
                       "Please enter code we just sent to email",
+                      textAlign: TextAlign.center,
                       style: TextStyle(
                           fontFamily: "Poppins",
-                          fontSize: GlobalVariable.textlg),
+                          fontSize: GlobalVariable.textmd),
                     ),
                     Text(
                       controller.email.toString(),
