@@ -1,6 +1,6 @@
 # bacayuk
 
-Project Aplikasi Perpustakaan Digital
+A new Flutter project.
 
 ## Getting Started
 

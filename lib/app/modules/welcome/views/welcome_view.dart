@@ -44,14 +44,14 @@ class WelcomeView extends GetView<WelcomeController> {
                   text: "Getting Started",
                   horizontal: 80.00,
                   vertical: 13.00,
-                  onPressed: () => Get.offAllNamed(Routes.REGISTER),
+                  onPressed: () => Get.toNamed(Routes.REGISTER),
                 ),
                 const SizedBox(
                   height: 30,
                 ),
                 InlineTextWidget(
                   text: "Already have an account?",
-                  onPressed: () => Get.offAllNamed(Routes.LOGIN),
+                  onPressed: () => Get.toNamed(Routes.LOGIN),
                   textButton: "Sign In",
                 )
               ],

@@ -15,7 +15,7 @@ class SplashView extends GetView<SplashController> {
           child: FlutterSplashScreen.scale(
         onEnd: () async {
           // controller.checkInternetConnection();
-          controller.checkPermission();
+          await controller.checkPermission();
           await controller.checkInternetConnection();
           controller.checkSession();
         },
@@ -33,7 +33,7 @@ class SplashView extends GetView<SplashController> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(
-                height: 700,
+                height: 600,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
