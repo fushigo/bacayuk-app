@@ -11,6 +11,7 @@ void main() async {
   runApp(
     GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      color: Colors.white,
       initialBinding: SplashBinding(),
       title: "Bacayuk",
       initialRoute: AppPages.INITIAL,

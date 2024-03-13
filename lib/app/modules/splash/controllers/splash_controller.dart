@@ -18,6 +18,11 @@ class SplashController extends GetxController {
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
 
+  @override
+  void onInit(){
+    super.onInit();
+    checkSession();
+  }
 
   Future<void> checkPermission() async {
     var deviceData = <String, dynamic>{};
@@ -130,7 +135,7 @@ class SplashController extends GetxController {
               .get(Endpoint.validasi, queryParameters: {"session": token});
 
           if (response.statusCode == 200) {
-            return Get.offAllNamed(Routes.HOME);
+            return Get.offAllNamed(Routes.LAYOUT);
           } else {
             return Get.offAllNamed(Routes.LOGIN);
           }

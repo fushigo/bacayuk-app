@@ -1,11 +1,64 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
+import 'package:bacayuk/app/data/constant/endpoint.dart';
+import 'package:bacayuk/app/data/model/response_user_id.dart';
+import 'package:bacayuk/app/data/provider/api_provider.dart';
+import 'package:bacayuk/app/data/provider/image_convert.dart';
+import 'package:bacayuk/app/data/provider/jwt_convert.dart';
+import 'package:bacayuk/app/data/provider/storage_provider.dart';
+import 'package:bacayuk/app/widget/snackbar.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
   //TODO: Implement HomeController
 
+  final token = StorageProvider.read(StorageKey.token);
   final count = 0.obs;
+  final loading = false.obs;
+  final username = "".obs;
+  final bio = "".obs;
+  final imageBase64 = "".obs;
+  late Rx<Uint8List?> profileImage = Rx<Uint8List?>(null);
 
+  @override
+  void onInit() async {
+    super.onInit();
+    await getUserData();
+  }
 
+  Future<void> getUserData() async {
+    try {
+      final decodedToken = await JwtConverter.jwtDecode(token);
+      String userId = decodedToken["id"].toString();
+
+      final responseUser = await ApiProvider.instance().get(Endpoint.user,
+          queryParameters: {"uid": userId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (responseUser.statusCode == 200) {
+        final result = ResponseUserId.fromJson(responseUser.data);
+        username.value = result.data!.username!;
+        bio.value = result.data!.profile!.bio!;
+        if(result.data!.profile!.gambar != null){
+          imageBase64.value = result.data!.profile!.gambar!;
+          await setProfile();
+        }
+      } else {
+        SnackBarWidget.snackBarError(
+            "Something went wrong, when collecting user data");
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+    // final userProfile =
+  }
+
+  Future<void> setProfile() async{
+   Uint8List based64Decoded =  await ImageConvert.base64ToImage(imageBase64.value);
+   profileImage.value = based64Decoded;
+  }
 
   void increment() => count.value++;
 }

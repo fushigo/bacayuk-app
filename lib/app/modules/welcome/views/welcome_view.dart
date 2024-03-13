@@ -14,6 +14,8 @@ class WelcomeView extends GetView<WelcomeController> {
 
   @override
   Widget build(BuildContext context) {
+    final heightBody = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    final widthBody = MediaQuery.of(context).size.width;
     GlobalOrientation.orientationPotrait();
     return Scaffold(
       body: SafeArea(
@@ -28,22 +30,22 @@ class WelcomeView extends GetView<WelcomeController> {
                 SizedBox(
                   child: LottieBuilder.asset(
                     "asset/json/welcome.json",
-                    width: 300,
-                    height: 300,
+                    width: widthBody,
+                    height: heightBody * 0.3,
                   ),
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                const TextView()
+                TextView(widthContent: widthBody * 0.85, heightContent: heightBody * 0.2,)
               ],
             ),
             Column(
               children: [
                 ButtonWidget(
                   text: "Getting Started",
-                  horizontal: 80.00,
-                  vertical: 13.00,
+                  horizontal: widthBody * 0.2,
+                  vertical: heightBody * 0.015,
                   onPressed: () => Get.toNamed(Routes.REGISTER),
                 ),
                 const SizedBox(

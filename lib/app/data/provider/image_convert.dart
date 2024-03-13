@@ -3,6 +3,8 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
+
 class ImageConvert {
   static Future<String?> imageToBase64(String imagePath) async {
     try {
@@ -17,14 +19,16 @@ class ImageConvert {
     }
   }
 
-  static Future<Uint8List?> base64ToImage(String base64) async {
+  static base64ToImage(String base64) async {
     try {
-      var imageBase64 = base64Decode(base64);
-      return imageBase64;
+      while(base64.length % 4 != 0){
+        base64 += '=';
+      }
+      Uint8List bytes = base64Decode(base64);
+      return bytes;
     } catch(e) {
       log('Error ketika konversi base64 ke image: $e');
       return null;
     }
   }
-
 }

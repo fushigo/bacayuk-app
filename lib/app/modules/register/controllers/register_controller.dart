@@ -50,6 +50,7 @@ class RegisterController extends GetxController {
     }
 
     try {
+      loading(true);
       FocusScope.of(Get.context!).unfocus();
       formKey.currentState?.save();
 
@@ -62,6 +63,7 @@ class RegisterController extends GetxController {
             }));
 
         if (response.statusCode == 200) {
+          loading(false);
           final result = ResponseRegister.fromJson(response.data);
           await StorageProvider.write(StorageKey.authtoken, result.token!);
           await StorageProvider.write(StorageKey.status, "unverify");
@@ -69,11 +71,11 @@ class RegisterController extends GetxController {
           Get.toNamed(Routes.OTP,
               parameters: {'email': emailController.text.toString()});
         } else {
+          loading(false);
           SnackBarWidget.snackBarError(
               "Something went wrong. Please check your credentials and try again");
         }
       }
-      loading(false);
     } on dio.DioException catch (e) {
       loading(false);
       if (e.response != null) {

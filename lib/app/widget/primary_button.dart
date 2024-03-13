@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
@@ -22,11 +23,12 @@ class ButtonWidget extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical)),
       onPressed: onPressed,
-      child: Text(
+      child: AutoSizeText(
         text,
+        minFontSize: GlobalVariable.textbase,
         style: TextStyle(
             color: Colors.white,
-            fontFamily: "Poppins",
+            fontFamily: GlobalVariable.fontPoppins,
             fontSize: GlobalVariable.textlg),
       ),
     );

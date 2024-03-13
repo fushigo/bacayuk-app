@@ -3,6 +3,7 @@ import 'package:bacayuk/app/data/model/response_login.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
+import 'package:bacayuk/app/widget/quickalert_view.dart';
 import 'package:bacayuk/app/widget/snackbar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';
@@ -11,17 +12,13 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   //TODO: Implement LoginController
 
-  final loading = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-
   final obsecureText = true.obs;
+  final loading = false.obs;
 
   final count = 0.obs;
-
-
-
   void increment() => count.value++;
 
   login() async {
@@ -33,8 +30,8 @@ class LoginController extends GetxController {
         passwordController.text.trim() == "") {
       return SnackBarWidget.snackBarInfo("Password cannot be empty");
     }
-
     try {
+      loading(true);
       final profileStatus = StorageProvider.read(StorageKey.profileStatus);
       final emailStatus = StorageProvider.read(StorageKey.status);
 
@@ -49,6 +46,7 @@ class LoginController extends GetxController {
             }));
 
         if (response.statusCode == 200) {
+          loading(false);
           if (profileStatus == "uncomplete") {
             return Get.toNamed(Routes.COMPLETED_PROFILE);
           } else if (emailStatus == "unverify") {
@@ -58,14 +56,14 @@ class LoginController extends GetxController {
             final result = ResponseLogin.fromJson(response.data);
             await StorageProvider.write(StorageKey.status, "logged");
             await StorageProvider.write(StorageKey.token, result.token!);
-            Get.offAllNamed(Routes.HOME);
+            Get.offAllNamed(Routes.LAYOUT);
           }
         } else {
+          loading(false);
           SnackBarWidget.snackBarError(
               "Something went wrong. Please check your credentials and try again");
         }
       }
-      loading(false);
     } on dio.DioException catch (e) {
       loading(false);
       if (e.response != null) {

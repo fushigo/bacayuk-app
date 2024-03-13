@@ -12,6 +12,9 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
   const CompletedProfileView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final heightBody =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    final widthBody = MediaQuery.of(context).size.width;
     GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
@@ -19,55 +22,53 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
         scrollDirection: Axis.vertical,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: widthBody,
+          height: heightBody,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                child: Column(children: [
-                  Text(
-                    "Completed Your Profile",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: GlobalVariable.heading_1),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "Don’t worry, only you can see your personal \n data. No one else will be able to see it.",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: "Poppins", fontSize: GlobalVariable.textmd),
-                  )
-                ]),
+                width: widthBody * 0.8,
+                child: FittedBox(
+                  child: Column(children: [
+                    Text(
+                      "Completed Your Profile",
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: GlobalVariable.heading_1),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "Don’t worry, only you can see your personal \n data. No one else will be able to see it.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: "Poppins",
+                          fontSize: GlobalVariable.textmd),
+                    )
+                  ]),
+                ),
               ),
               SizedBox(
-                height: 150,
-                width: 150,
-                child: Obx(
-                  () => InkWell(
-                    onTap: () {
-                      controller.getImage();
-                    },
-                    child: ClipOval(
-                      child: Container(
-                        color: Colors.grey, // Warna latar belakang avatar
+                height: heightBody * 0.18,
+                width: widthBody * 0.4,
+                child: FittedBox(
+                  fit: BoxFit.fill,
+                  child: Obx(
+                    () => InkWell(
+                      onTap: () {
+                        controller.getImage();
+                      },
+                      child: ClipOval(
                         child: controller.imagePath.value == ''
                             ? Image.asset(
                                 "asset/image/person.png",
-                                fit: BoxFit.cover,
-                                width: 100,
-                                height: 100,
                               )
                             : Image.file(
                                 File(controller.imagePath.value),
-                                fit: BoxFit.cover,
-                                width: 100,
-                                height: 100,
                               ),
                       ),
                     ),
@@ -75,13 +76,16 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
                 ),
               ),
               const CompletedProfileForm(),
-              ButtonWidget(
-                  text: "Confirm",
-                  onPressed: () {
-                    controller.sendProfile();
-                  },
-                  horizontal: 110,
-                  vertical: 12.00)
+              Obx(() => controller.loading.value
+                  ? const CircularProgressIndicator()
+                  : ButtonWidget(
+                      text: "Confirm",
+                      onPressed: () {
+                        controller.sendProfile();
+                      },
+                      horizontal: widthBody * 0.3,
+                      vertical: heightBody * 0.015,
+                    ))
             ],
           ),
         ),

@@ -11,6 +11,11 @@ abstract class Routes {
   static const OTP = _Paths.OTP;
   static const COMPLETED_PROFILE = _Paths.COMPLETED_PROFILE;
   static const BOARDING = _Paths.BOARDING;
+  static const LAYOUT = _Paths.LAYOUT;
+  static const BOOK = _Paths.BOOK;
+  static const COLLECTION = _Paths.COLLECTION;
+  static const HISTORY = _Paths.HISTORY;
+  static const PROFILE = _Paths.PROFILE;
 }
 
 abstract class _Paths {
@@ -23,4 +28,9 @@ abstract class _Paths {
   static const OTP = '/otp';
   static const COMPLETED_PROFILE = '/completed-profile';
   static const BOARDING = '/boarding';
+  static const LAYOUT = '/layout';
+  static const BOOK = '/book';
+  static const COLLECTION = '/collection';
+  static const HISTORY = '/history';
+  static const PROFILE = '/profile';
 }

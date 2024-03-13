@@ -3,23 +3,28 @@ import 'package:bacayuk/app/modules/login/controllers/login_controller.dart';
 import 'package:bacayuk/app/widget/login_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
+import 'package:bacayuk/app/widget/quickalert_view.dart';
 import 'package:bacayuk/app/widget/third_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:quickalert/quickalert.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final widthBody = MediaQuery.of(context).size.width;
+    final heightBody =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: widthBody,
+          height: heightBody,
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
@@ -50,14 +55,14 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 child: Column(
                   children: [
-                    ButtonWidget(
+                    Obx(() => controller.loading.value ? const CircularProgressIndicator() : ButtonWidget(
                       onPressed: () {
                         controller.login();
                       },
                       text: "Sign In",
                       horizontal: 110,
                       vertical: 12.00,
-                    ),
+                    ),),
                     Container(
                         margin: const EdgeInsets.only(top: 20),
                         alignment: Alignment.center,

@@ -11,19 +11,22 @@ class BoardingView extends GetView<BoardingController> {
   const BoardingView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final widthBody = MediaQuery.of(context).size.width;
+    final heightBody =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     return Scaffold(
         body: SafeArea(
       child: Container(
         color: Colors.white,
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
+        width: widthBody,
+        height: heightBody,
         alignment: Alignment.center,
         child: OnBoardingSlider(
           centerBackground: true,
           pageBackgroundColor: Colors.white,
           headerBackgroundColor: Colors.white,
           finishButtonText: "Start Now",
-          onFinish: () => Get.offAllNamed(Routes.HOME),
+          onFinish: () => Get.offAllNamed(Routes.LAYOUT),
           finishButtonStyle:
               FinishButtonStyle(backgroundColor: Colors.blue.shade900),
           skipTextButton: Text(
@@ -35,20 +38,20 @@ class BoardingView extends GetView<BoardingController> {
           background: [
             Image.asset(
               "asset/image/slider_1.png",
-              width: 300,
-              height: 320,
+              width: widthBody * 0.8,
+              height: heightBody * 0.6,
               alignment: Alignment.center,
             ),
             Image.asset(
               "asset/image/slider_2.png",
-              width: 300,
-              height: 320,
+              width: widthBody * 0.8,
+              height: heightBody * 0.6,
               alignment: Alignment.center,
             ),
             Image.asset(
               "asset/image/slider_3.png",
-              width: 300,
-              height: 320,
+              width: widthBody * 0.8,
+              height: heightBody * 0.6,
               alignment: Alignment.center,
             ),
           ],
@@ -56,66 +59,85 @@ class BoardingView extends GetView<BoardingController> {
           speed: 1.8,
           pageBodies: [
             Container(
+              width: widthBody,
+              height: heightBody * 0.3,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: <Widget>[
-                  const SizedBox(
-                    height: 480,
+                   SizedBox(
+                    height: heightBody * 0.55,
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontPoppins,
-                            fontSize: GlobalVariable.heading_2,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
-                        children: const [
-                          TextSpan(
-                              text:
-                                  "Memulai petualangan literasi \n digital bersama "),
-                          TextSpan(
-                              text: "Baca Yuk!",
-                              style: TextStyle(color: Colors.blueAccent))
-                        ]),
+                  SizedBox(
+                    width: widthBody,
+                    height: heightBody * 0.1,
+                    child: FittedBox(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            style: TextStyle(
+                                fontFamily: GlobalVariable.fontPoppins,
+                                fontSize: GlobalVariable.heading_2,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                            children: const [
+                              TextSpan(
+                                  text:
+                                      "Memulai petualangan literasi \n digital bersama "),
+                              TextSpan(
+                                  text: "Baca Yuk!",
+                                  style: TextStyle(color: Colors.blueAccent))
+                            ]),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
                   ),
-                  Text(
-                    "Temukan beragam fitur yang akan mempermudah awal perjalananmu dalam literasi digital. Kami hadir untuk membuat pengalaman membaca menjadi lebih menyenangkan",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontFamily: GlobalVariable.fontPoppins,
-                        fontSize: GlobalVariable.textmd),
+                  SizedBox(
+                    width: widthBody,
+                    child: Text(
+                      "Temukan beragam fitur yang akan mempermudah awal perjalananmu dalam literasi digital. Kami hadir untuk membuat pengalaman membaca menjadi lebih menyenangkan",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontFamily: GlobalVariable.fontPoppins,
+                          fontSize: GlobalVariable.textmd),
+                    ),
                   )
                 ],
               ),
             ),
             Container(
+              width: widthBody,
+              height: heightBody * 0.3,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: <Widget>[
-                  const SizedBox(
-                    height: 480,
+                  SizedBox(
+                    height: heightBody * 0.55,
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontPoppins,
-                            fontSize: GlobalVariable.heading_2,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
-                        children: const [
-                          TextSpan(text: "Kemudahan dalam melakukan \n"),
-                          TextSpan(
-                              text: "pencarian ",
-                              style: TextStyle(color: Colors.blueAccent)),
-                          TextSpan(
-                            text: "buku perpustakaan",
-                          )
-                        ]),
+                  SizedBox(
+                    width: widthBody,
+                    height: heightBody * 0.1,
+                    child: FittedBox(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            style: TextStyle(
+                                fontFamily: GlobalVariable.fontPoppins,
+                                fontSize: GlobalVariable.heading_2,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                            children: const [
+                              TextSpan(text: "Kemudahan dalam melakukan \n"),
+                              TextSpan(
+                                  text: "pencarian ",
+                                  style: TextStyle(color: Colors.blueAccent)),
+                              TextSpan(
+                                text: "buku perpustakaan",
+                              )
+                            ]),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,
@@ -131,28 +153,35 @@ class BoardingView extends GetView<BoardingController> {
               ),
             ),
             Container(
+              width: widthBody,
+              height: heightBody * 0.3,
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 children: <Widget>[
-                  const SizedBox(
-                    height: 480,
+                  SizedBox(
+                    height: heightBody * 0.55,
                   ),
-                  RichText(
-                    textAlign: TextAlign.center,
-                    text: TextSpan(
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontPoppins,
-                            fontSize: GlobalVariable.heading_2,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black),
-                        children: const [
-                          TextSpan(
-                              text:
-                                  "Baca di Mana Saja, Kapan Saja \n dengan "),
-                          TextSpan(
-                              text: "Baca Yuk!",
-                              style: TextStyle(color: Colors.blueAccent))
-                        ]),
+                  SizedBox(
+                    width: widthBody,
+                    height: heightBody * 0.1,
+                    child: FittedBox(
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                            style: TextStyle(
+                                fontFamily: GlobalVariable.fontPoppins,
+                                fontSize: GlobalVariable.heading_2,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.black),
+                            children: const [
+                              TextSpan(
+                                  text: "Baca di Mana Saja, Kapan Saja \n dengan "),
+                              TextSpan(
+                                  text: "Baca Yuk!",
+                                  style: TextStyle(color: Colors.blueAccent))
+                            ]),
+                      ),
+                    ),
                   ),
                   const SizedBox(
                     height: 20,

@@ -32,6 +32,7 @@ class CompletedProfileController extends GetxController {
   String selectedItem = "Other";
 
   final count = 0.obs;
+  final loading = false.obs;
 
   void increment() => count.value++;
 
@@ -41,7 +42,7 @@ class CompletedProfileController extends GetxController {
     if (image != null) {
       imagePath.value = image.path;
       imageSize.value =
-          "${((File(imagePath.value)).lengthSync() / 1024 / 1024).toStringAsFixed(2)}Mb";
+          "${((File(imagePath.value)).lengthSync() / 6000 / 6000).toStringAsFixed(2)}Mb";
       return SnackBarWidget.snackBarSuccess(
           "Profile picture changed successfully");
     } else {
@@ -71,6 +72,7 @@ class CompletedProfileController extends GetxController {
     } else {}
 
     try {
+      loading(true);
       final token = StorageProvider.read(StorageKey.token);
       log("token: $token");
       final decodedToken = await JwtConverter.jwtDecode(token);
@@ -97,14 +99,17 @@ class CompletedProfileController extends GetxController {
                 options: Options(headers: {"authorization": "Bearer $token"}));
 
         if (responseProfile.statusCode == 201) {
+          loading(false);
           await StorageProvider.write(StorageKey.profileStatus, "completed");
           Get.offAllNamed(Routes.BOARDING);
         } else {
+          loading(false);
           SnackBarWidget.snackBarError(
               "Something went wrong. Please try again");
         }
       }
     } on DioException catch (e) {
+      loading(false);
       log(e.requestOptions.headers.toString());
       if (e.response != null) {
         if (e.response?.data != null) {
@@ -117,6 +122,7 @@ class CompletedProfileController extends GetxController {
             "Something went wrong. ${e.message ?? ""}");
       }
     } catch (e) {
+      loading(false);
       SnackBarWidget.snackBarError("Something went wrong. ${e.toString()}");
     }
   }

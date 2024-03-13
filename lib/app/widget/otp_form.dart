@@ -8,18 +8,20 @@ class OtpForm extends GetView<OtpController> {
       {super.key,
       required this.textEditingController,
       required this.first,
-      required this.last});
+      required this.last, required this.widthContent, required this.heightContent});
 
   final bool first;
   final bool last;
+  final widthContent;
+  final heightContent;
 
   final TextEditingController textEditingController;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 65,
-      width: 60,
+      height: heightContent,
+      width: widthContent,
       child: TextField(
         textAlignVertical: TextAlignVertical.center,
         cursorHeight: 30,

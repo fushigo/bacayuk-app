@@ -16,6 +16,7 @@ class OtpController extends GetxController {
   late Timer _timer;
   final _start = 60.obs;
   var isTimerRunning = false.obs;
+  final loading = false.obs;
 
   final String email = Get.parameters['email'] ?? "No have email";
   final TextEditingController otentication1 = TextEditingController();
@@ -80,21 +81,25 @@ class OtpController extends GetxController {
     String paylaoad =
         "${otentication1.text.toString()}${otentication2.text.toString()}${otentication3.text.toString()}${otentication4.text.toString()}";
     try {
+      loading(true);
       final response = await ApiProvider.instance().post(Endpoint.otp,
           data: ({
             "token": StorageProvider.read(StorageKey.authtoken),
             "code": int.parse(paylaoad)
           }));
       if (response.statusCode == 200) {
+        loading(false);
         ResponseOtp responseOtp = ResponseOtp.fromJson(response.data);
         await StorageProvider.write(StorageKey.token, responseOtp.token!);
         await StorageProvider.write(StorageKey.status, "logged");
         Get.offAllNamed(Routes.COMPLETED_PROFILE);
       } else {
+        loading(false);
         SnackBarWidget.snackBarError(
             "Something went wrong. Email verification has failed");
       }
     } catch (e) {
+      loading(false);
       SnackBarWidget.snackBarError("Something went wrong. ${e.toString()}");
     }
   }

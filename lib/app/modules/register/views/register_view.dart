@@ -12,14 +12,16 @@ class RegisterView extends GetView<RegisterController> {
   const RegisterView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final widthBody = MediaQuery.of(context).size.width;
+    final heightBody = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Container(
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
+          width: widthBody,
+          height: heightBody,
           alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           child: Column(
@@ -51,14 +53,14 @@ class RegisterView extends GetView<RegisterController> {
               SizedBox(
                 child: Column(
                   children: [
-                    ButtonWidget(
+                    Obx(() => controller.loading.value ? const CircularProgressIndicator() : ButtonWidget(
                       onPressed: () {
                         controller.register();
                       },
-                      text: "Sign Up",
+                      text: "Sign In",
                       horizontal: 110,
                       vertical: 12.00,
-                    ),
+                    ),),
                     Container(
                         margin: const EdgeInsets.only(top: 20),
                         alignment: Alignment.center,
