@@ -8,6 +8,7 @@ class GlobalVariable {
   static double textmd = 14;
   static double textlg = 16;
   static String fontPoppins = "Poppins";
+  static String fontSignika = "Signika";
 }
 
 class GlobalOrientation {

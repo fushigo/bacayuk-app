@@ -42,6 +42,9 @@ flutter:
     - family: Poppins
       fonts:
         - asset: asset/fonts/poppins/Poppins-Regular.ttf
+    - family: Signika
+      fonts:
+        - asset: asset/fonts/signika/Signika-Regular.ttf
   uses-material-design: true
 
 flutter_launcher_icons:

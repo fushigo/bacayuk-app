@@ -55,22 +55,22 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
               SizedBox(
                 height: heightBody * 0.18,
                 width: widthBody * 0.4,
-                child: FittedBox(
-                  fit: BoxFit.fill,
-                  child: Obx(
-                    () => InkWell(
-                      onTap: () {
-                        controller.getImage();
-                      },
-                      child: ClipOval(
+                child: Obx(
+                  () => InkWell(
+                    onTap: () {
+                      controller.getImage();
+                    },
+                    child: ClipOval(
+                      child: FittedBox(
+                        fit: BoxFit.fill,
                         child: controller.imagePath.value == ''
                             ? Image.asset(
-                                "asset/image/person.png",
-                              )
+                          "asset/image/person.png",
+                        )
                             : Image.file(
-                                File(controller.imagePath.value),
-                              ),
-                      ),
+                          File(controller.imagePath.value),
+                        ),
+                      )
                     ),
                   ),
                 ),

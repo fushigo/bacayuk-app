@@ -30,6 +30,7 @@ class HomeController extends GetxController {
 
   Future<void> getUserData() async {
     try {
+      loading(true);
       final decodedToken = await JwtConverter.jwtDecode(token);
       String userId = decodedToken["id"].toString();
 
@@ -38,6 +39,7 @@ class HomeController extends GetxController {
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       if (responseUser.statusCode == 200) {
+        loading(false);
         final result = ResponseUserId.fromJson(responseUser.data);
         username.value = result.data!.username!;
         bio.value = result.data!.profile!.bio!;
@@ -46,10 +48,12 @@ class HomeController extends GetxController {
           await setProfile();
         }
       } else {
+        loading(false);
         SnackBarWidget.snackBarError(
             "Something went wrong, when collecting user data");
       }
     } catch (e) {
+      loading(false);
       log(e.toString());
     }
     // final userProfile =
@@ -59,6 +63,32 @@ class HomeController extends GetxController {
    Uint8List based64Decoded =  await ImageConvert.base64ToImage(imageBase64.value);
    profileImage.value = based64Decoded;
   }
+
+  Future<List<dynamic>?> getPopularBooks() async {
+    try {
+      loading(true);
+      final response = await ApiProvider.instance().get(
+        Endpoint.bookPopular,
+        options: Options(headers: {"authorization": "Bearer $token"}),
+      );
+
+      if (response.statusCode == 200) {
+        loading(false);
+        final List<dynamic> result = response.data["data"];
+        return result;
+      } else {
+        loading(false);
+        SnackBarWidget.snackBarError("Something went wrong, when collecting data");
+        return null;
+      }
+    } catch (e) {
+      loading(false);
+      log(e.toString());
+      return null;
+    }
+  }
+
+
 
   void increment() => count.value++;
 }
