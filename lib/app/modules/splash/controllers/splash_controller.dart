@@ -91,6 +91,7 @@ class SplashController extends GetxController {
     } else {
       if (await Permission.photos.isDenied) {
         await permissionHandler(Permission.photos, "Photos denied");
+        await permissionHandler(Permission.videos, "Videos denied");
       }
     }
   }

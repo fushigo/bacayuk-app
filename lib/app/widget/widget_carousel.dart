@@ -16,7 +16,7 @@ class WidgetCarousel extends GetView<HomeController> {
         width: widthBody,
         child: CarouselSlider(
           options: CarouselOptions(
-              height: 300.0,
+              height: heightBody * 0.3,
               enlargeCenterPage: true,
               viewportFraction: 1,
               aspectRatio: 4.0,

@@ -33,6 +33,7 @@ class OtpForm extends GetView<OtpController> {
         ),
         autofocus: true,
         maxLength: 1,
+        keyboardType: TextInputType.number,
         style: TextStyle(
             fontFamily: "Poppins",
             fontSize: GlobalVariable.heading_2,

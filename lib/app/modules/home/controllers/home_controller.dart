@@ -2,6 +2,7 @@ import 'dart:developer';
 import 'dart:typed_data';
 
 import 'package:bacayuk/app/data/constant/endpoint.dart';
+import 'package:bacayuk/app/data/model/response_book_popular.dart';
 import 'package:bacayuk/app/data/model/response_user_id.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/image_convert.dart';
@@ -21,11 +22,13 @@ class HomeController extends GetxController {
   final bio = "".obs;
   final imageBase64 = "".obs;
   late Rx<Uint8List?> profileImage = Rx<Uint8List?>(null);
+  final dataBookPopular = RxList<DataBookPopular>();
 
   @override
   void onInit() async {
     super.onInit();
     await getUserData();
+    await getPopularBooks();
   }
 
   Future<void> getUserData() async {
@@ -43,7 +46,7 @@ class HomeController extends GetxController {
         final result = ResponseUserId.fromJson(responseUser.data);
         username.value = result.data!.username!;
         bio.value = result.data!.profile!.bio!;
-        if(result.data!.profile!.gambar != null){
+        if (result.data!.profile!.gambar != null) {
           imageBase64.value = result.data!.profile!.gambar!;
           await setProfile();
         }
@@ -56,15 +59,15 @@ class HomeController extends GetxController {
       loading(false);
       log(e.toString());
     }
-    // final userProfile =
   }
 
-  Future<void> setProfile() async{
-   Uint8List based64Decoded =  await ImageConvert.base64ToImage(imageBase64.value);
-   profileImage.value = based64Decoded;
+  Future<void> setProfile() async {
+    Uint8List based64Decoded =
+        await ImageConvert.base64ToImage(imageBase64.value);
+    profileImage.value = based64Decoded;
   }
 
-  Future<List<dynamic>?> getPopularBooks() async {
+  Future<void> getPopularBooks() async {
     try {
       loading(true);
       final response = await ApiProvider.instance().get(
@@ -74,21 +77,19 @@ class HomeController extends GetxController {
 
       if (response.statusCode == 200) {
         loading(false);
-        final List<dynamic> result = response.data["data"];
-        return result;
+        // final List<dynamic> result = response.data["data"];
+        final responseBookPopular = ResponseBookPopular.fromJson(response.data);
+        dataBookPopular.value = responseBookPopular.data!;
       } else {
         loading(false);
-        SnackBarWidget.snackBarError("Something went wrong, when collecting data");
-        return null;
+        SnackBarWidget.snackBarError(
+            "Something went wrong, when collecting data");
       }
     } catch (e) {
       loading(false);
       log(e.toString());
-      return null;
     }
   }
-
-
 
   void increment() => count.value++;
 }

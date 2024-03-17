@@ -23,6 +23,7 @@ class RegisterForm extends GetView<RegisterController> {
                 maxLength: 16,
                 cursorColor: Colors.blueAccent,
                 controller: controller.usernameController,
+                keyboardType: TextInputType.name,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                     counterText: "",
@@ -48,6 +49,7 @@ class RegisterForm extends GetView<RegisterController> {
                 maxLength: 30,
                 cursorColor: Colors.blueAccent,
                 controller: controller.emailController,
+                keyboardType: TextInputType.emailAddress,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                     counterText: "",
@@ -74,6 +76,7 @@ class RegisterForm extends GetView<RegisterController> {
                   maxLength: 16,
                   obscureText: controller.obsecureText.value,
                   cursorColor: Colors.blueAccent,
+                  keyboardType: TextInputType.visiblePassword,
                   controller: controller.passwordController,
                   textAlignVertical: TextAlignVertical.center,
                   decoration: InputDecoration(

@@ -57,7 +57,7 @@ class RegisterView extends GetView<RegisterController> {
                       onPressed: () {
                         controller.register();
                       },
-                      text: "Sign In",
+                      text: "Sign Up",
                       horizontal: 110,
                       vertical: 12.00,
                     ),),

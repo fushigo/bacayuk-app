@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:quickalert/models/quickalert_options.dart';
 import 'package:quickalert/models/quickalert_type.dart';
@@ -16,6 +17,33 @@ class QuickAlertWidget {
           ? const Duration(days: 1)
           : const Duration(milliseconds: 1),
       title: "Loading data...",
+    );
+  }
+
+  static inputAlert(String title, String text, onTap) {
+    final VoidCallback onTap;
+    QuickAlert.show(
+      context: Get.context!,
+      type: QuickAlertType.custom,
+      barrierDismissible: true,
+      confirmBtnText: "Confirm",
+      widget: TextFormField(
+        decoration: const InputDecoration(
+          alignLabelWithHint: true,
+          hintText: 'Date',
+          prefixIcon: Icon(
+            Icons.calendar_today,
+          ),
+        ),
+        textInputAction: TextInputAction.next,
+        keyboardType: TextInputType.phone,
+        readOnly: true,
+        onTap: () {
+          
+        },
+      ),
+      title: title,
+      text: text,
     );
   }
 }

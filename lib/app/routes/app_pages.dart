@@ -4,6 +4,10 @@ import '../modules/boarding/bindings/boarding_binding.dart';
 import '../modules/boarding/views/boarding_view.dart';
 import '../modules/book/bindings/book_binding.dart';
 import '../modules/book/views/book_view.dart';
+import '../modules/book_detail/bindings/book_detail_binding.dart';
+import '../modules/book_detail/views/book_detail_view.dart';
+import '../modules/book_viewer/bindings/book_viewer_binding.dart';
+import '../modules/book_viewer/views/book_viewer_view.dart';
 import '../modules/collection/bindings/collection_binding.dart';
 import '../modules/collection/views/collection_view.dart';
 import '../modules/completed_profile/bindings/completed_profile_binding.dart';
@@ -99,6 +103,16 @@ class AppPages {
       name: _Paths.PROFILE,
       page: () => const ProfileView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_DETAIL,
+      page: () => const BookDetailView(),
+      binding: BookDetailBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_VIEWER,
+      page: () => const BookViewerView(),
+      binding: BookViewerBinding(),
     ),
   ];
 }

@@ -25,6 +25,7 @@ class LoginForm extends GetView<LoginController> {
                 cursorColor: Colors.blueAccent,
                 controller: controller.emailController,
                 textAlignVertical: TextAlignVertical.center,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                     counterText: "",
                     focusedBorder: OutlineInputBorder(
@@ -52,6 +53,7 @@ class LoginForm extends GetView<LoginController> {
                   cursorColor: Colors.blueAccent,
                   controller: controller.passwordController,
                   textAlignVertical: TextAlignVertical.center,
+                  keyboardType: TextInputType.visiblePassword,
                   decoration: InputDecoration(
                       counterText: "",
                       suffixIcon: IconButton(

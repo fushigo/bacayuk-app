@@ -23,6 +23,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
                 maxLength: 30,
                 cursorColor: Colors.blueAccent,
                 controller: controller.namalengkapController,
+                keyboardType: TextInputType.name,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                     counterText: "",
@@ -47,6 +48,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
                 maxLines: 1,
                 cursorColor: Colors.blueAccent,
                 controller: controller.bioController,
+                keyboardType: TextInputType.text,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
@@ -67,18 +69,24 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
             SizedBox(
               height: 50,
               child: TextFormField(
+                readOnly: true,
                 maxLines: 1,
                 maxLength: 10,
                 cursorColor: Colors.blueAccent,
                 controller: controller.tanggallahirController,
+                onTap: () {
+                  controller.selectDate();
+                },
+                keyboardType: TextInputType.datetime,
                 textAlignVertical: TextAlignVertical.center,
                 decoration: InputDecoration(
                     counterText: "",
+                    prefixIcon: const Icon(Icons.calendar_today),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: Colors.blue.shade700, width: 1)),
-                    hintText: "DD-MM-YYYY",
                     labelText: "Birthday",
+                    hintText: "Date",
                     floatingLabelStyle:
                         const TextStyle(color: Colors.blueAccent),
                     hintStyle: const TextStyle(
@@ -116,7 +124,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
                   border: OutlineInputBorder(
                     borderSide: const BorderSide(width: 1, color: Colors.grey),
                     borderRadius:
-                        BorderRadius.circular(5.0), // menambah border radius
+                        BorderRadius.circular(5.0),
                   ),
                 ),
               ),
@@ -128,6 +136,7 @@ class CompletedProfileForm extends GetView<CompletedProfileController> {
                 cursorColor: Colors.blueAccent,
                 controller: controller.alamatController,
                 textAlignVertical: TextAlignVertical.center,
+                keyboardType: TextInputType.streetAddress,
                 decoration: InputDecoration(
                     focusedBorder: OutlineInputBorder(
                         borderSide:

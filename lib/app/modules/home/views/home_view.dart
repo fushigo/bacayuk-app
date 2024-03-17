@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/home/controllers/home_controller.dart';
+import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/widget_carousel.dart';
+import 'package:bacayuk/app/widget/widget_image_memory.dart';
 import 'package:bacayuk/app/widget/widget_kategori_row.dart';
 import 'package:bacayuk/app/widget/widget_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:skeletonizer/skeletonizer.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
@@ -49,62 +49,116 @@ class HomeView extends GetView<HomeController> {
                       SizedBox(height: heightBody * 0.02),
                       SizedBox(
                         width: widthBody,
-                        child: FutureBuilder<List<dynamic>?>(
-                          future: controller.getPopularBooks(),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting) {
-                              return const CircularProgressIndicator();
-                            } else {
-                              if (snapshot.hasData && snapshot.data != null) {
-                                List<dynamic> books = snapshot.data!;
-                                return GridView.count(
-                                  crossAxisCount: 3,
-                                  crossAxisSpacing: 10,
-                                  shrinkWrap: true,
-                                  physics: const NeverScrollableScrollPhysics(),
-                                  childAspectRatio: 3 / 6,
-                                  children: books.take(6).map((item) {
-                                    return Obx(() => Skeletonizer(
-                                      enabled: controller.loading.value,
-                                      child: SizedBox(
-                                        child: Column(
-                                          children: [
-                                            InkWell(
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                BorderRadius.circular(10),
-                                                child: Image.asset(
-                                                  "asset/image/banner_1.png",
-                                                  height: 170,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              height: heightBody * 0.02,
-                                            ),
-                                            Text(
-                                              item["Judul"],
-                                              textAlign: TextAlign.start,
-                                              style: TextStyle(
-                                                  overflow: TextOverflow.ellipsis,
-                                                  fontSize: GlobalVariable.textlg,
-                                                  fontFamily:
-                                                  GlobalVariable.fontSignika),
-                                            )
-                                          ],
-                                        ),
+                        child: Obx(() => SizedBox(
+                              child: controller.dataBookPopular.isEmpty
+                                  ? Shimmer.fromColors(
+                                      baseColor: Colors.grey[300]!,
+                                      highlightColor: Colors.grey[100]!,
+                                      child: GridView.count(
+                                        crossAxisCount: 3,
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                        shrinkWrap: true,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        childAspectRatio: 4 / 7,
+                                        children: List.generate(
+                                            6,
+                                            (index) => SizedBox(
+                                                  child: Column(
+                                                    children: [
+                                                      ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        child: Container(
+                                                          height: 170,
+                                                          width:
+                                                              widthBody * 0.5,
+                                                          color: Colors
+                                                              .grey, // Placeholder color
+                                                        ),
+                                                      ),
+                                                      SizedBox(
+                                                        height:
+                                                            heightBody * 0.02,
+                                                      ),
+                                                      Container(
+                                                        height: 16,
+                                                        width: widthBody * 0.5,
+                                                        color: Colors
+                                                            .grey, // Placeholder color
+                                                      ),
+                                                    ],
+                                                  ),
+                                                )),
                                       ),
-                                    ));
-                                  }).toList(),
-                                );
-                              } else {
-                                return Text("No book found");
-                              }
-                            }
-                          },
-                        ),
+                                    )
+                                  : GridView.count(
+                                      crossAxisCount: 3,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 10,
+                                      shrinkWrap: true,
+                                      physics:
+                                          const NeverScrollableScrollPhysics(),
+                                      childAspectRatio: 4 / 7,
+                                      children: controller.dataBookPopular
+                                          .map((data) => SizedBox(
+                                                child: Column(
+                                                  children: [
+                                                    InkWell(
+                                                      onTap: () => Get.toNamed(Routes.BOOK_DETAIL, parameters: {
+                                                        "id": data.bukuID.toString(),
+                                                      }),
+                                                      child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                          child: data.cover !=
+                                                                  null
+                                                              ? Image(
+                                                                  image: base64Image(
+                                                                      data.cover),
+                                                                  height: heightBody * 0.18,
+                                                                  width:
+                                                                      widthBody *
+                                                                          0.5,
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                )
+                                                              : Image.asset(
+                                                                  "asset/image/banner_1.png",
+                                                                  height: heightBody * 0.18,
+                                                                  width:
+                                                                      widthBody *
+                                                                          0.5,
+                                                                  fit: BoxFit
+                                                                      .fill,
+                                                                )),
+                                                    ),
+                                                    SizedBox(
+                                                      height: heightBody * 0.02,
+                                                    ),
+                                                    Text(
+                                                      data.judul!,
+                                                      textAlign:
+                                                          TextAlign.start,
+                                                      style: TextStyle(
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
+                                                          fontSize:
+                                                              GlobalVariable
+                                                                  .textlg,
+                                                          fontFamily:
+                                                              GlobalVariable
+                                                                  .fontSignika),
+                                                    )
+                                                  ],
+                                                ),
+                                              ))
+                                          .toList(),
+                                    ),
+                            )),
                       )
                     ],
                   ),

@@ -27,6 +27,8 @@ class CompletedProfileController extends GetxController {
   var imagePath = ''.obs;
   var imageSize = ''.obs;
 
+  final date = "".obs;
+
   String profilePict = 'nopicture';
 
   String selectedItem = "Other";
@@ -42,7 +44,7 @@ class CompletedProfileController extends GetxController {
     if (image != null) {
       imagePath.value = image.path;
       imageSize.value =
-          "${((File(imagePath.value)).lengthSync() / 6000 / 6000).toStringAsFixed(2)}Mb";
+          "${((File(imagePath.value)).lengthSync() / 1024 / 1024).toStringAsFixed(2)}Mb";
       return SnackBarWidget.snackBarSuccess(
           "Profile picture changed successfully");
     } else {
@@ -52,6 +54,19 @@ class CompletedProfileController extends GetxController {
 
   void check() {
     log("Value: $selectedItem");
+  }
+
+  Future<void> selectDate() async {
+    DateTime? picked = await showDatePicker(
+        context: Get.context!,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1900),
+        lastDate: DateTime(2300)
+    );
+
+    if(picked != null) {
+      tanggallahirController.text = picked.toString().split(" ")[0];
+    }
   }
 
   sendProfile() async {
