@@ -1,6 +1,8 @@
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/home/controllers/home_controller.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
+import 'package:bacayuk/app/widget/grid_book_popular.dart';
+import 'package:bacayuk/app/widget/shimmer.dart';
 import 'package:bacayuk/app/widget/widget_carousel.dart';
 import 'package:bacayuk/app/widget/widget_image_memory.dart';
 import 'package:bacayuk/app/widget/widget_kategori_row.dart';
@@ -51,113 +53,8 @@ class HomeView extends GetView<HomeController> {
                         width: widthBody,
                         child: Obx(() => SizedBox(
                               child: controller.dataBookPopular.isEmpty
-                                  ? Shimmer.fromColors(
-                                      baseColor: Colors.grey[300]!,
-                                      highlightColor: Colors.grey[100]!,
-                                      child: GridView.count(
-                                        crossAxisCount: 3,
-                                        mainAxisSpacing: 10,
-                                        crossAxisSpacing: 10,
-                                        shrinkWrap: true,
-                                        physics:
-                                            const NeverScrollableScrollPhysics(),
-                                        childAspectRatio: 4 / 7,
-                                        children: List.generate(
-                                            6,
-                                            (index) => SizedBox(
-                                                  child: Column(
-                                                    children: [
-                                                      ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10),
-                                                        child: Container(
-                                                          height: 170,
-                                                          width:
-                                                              widthBody * 0.5,
-                                                          color: Colors
-                                                              .grey, // Placeholder color
-                                                        ),
-                                                      ),
-                                                      SizedBox(
-                                                        height:
-                                                            heightBody * 0.02,
-                                                      ),
-                                                      Container(
-                                                        height: 16,
-                                                        width: widthBody * 0.5,
-                                                        color: Colors
-                                                            .grey, // Placeholder color
-                                                      ),
-                                                    ],
-                                                  ),
-                                                )),
-                                      ),
-                                    )
-                                  : GridView.count(
-                                      crossAxisCount: 3,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 10,
-                                      shrinkWrap: true,
-                                      physics:
-                                          const NeverScrollableScrollPhysics(),
-                                      childAspectRatio: 4 / 7,
-                                      children: controller.dataBookPopular
-                                          .map((data) => SizedBox(
-                                                child: Column(
-                                                  children: [
-                                                    InkWell(
-                                                      onTap: () => Get.toNamed(Routes.BOOK_DETAIL, parameters: {
-                                                        "id": data.bukuID.toString(),
-                                                      }),
-                                                      child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(10),
-                                                          child: data.cover !=
-                                                                  null
-                                                              ? Image(
-                                                                  image: base64Image(
-                                                                      data.cover),
-                                                                  height: heightBody * 0.18,
-                                                                  width:
-                                                                      widthBody *
-                                                                          0.5,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                )
-                                                              : Image.asset(
-                                                                  "asset/image/banner_1.png",
-                                                                  height: heightBody * 0.18,
-                                                                  width:
-                                                                      widthBody *
-                                                                          0.5,
-                                                                  fit: BoxFit
-                                                                      .fill,
-                                                                )),
-                                                    ),
-                                                    SizedBox(
-                                                      height: heightBody * 0.02,
-                                                    ),
-                                                    Text(
-                                                      data.judul!,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      style: TextStyle(
-                                                          overflow: TextOverflow
-                                                              .ellipsis,
-                                                          fontSize:
-                                                              GlobalVariable
-                                                                  .textlg,
-                                                          fontFamily:
-                                                              GlobalVariable
-                                                                  .fontSignika),
-                                                    )
-                                                  ],
-                                                ),
-                                              ))
-                                          .toList(),
-                                    ),
+                                  ? ShimmerWidget(widthBody, heightBody)
+                                  : GridBookPopular(widthBody, heightBody)
                             )),
                       )
                     ],

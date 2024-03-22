@@ -3,12 +3,9 @@ import 'package:bacayuk/app/modules/login/controllers/login_controller.dart';
 import 'package:bacayuk/app/widget/login_form.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/primary_button.dart';
-import 'package:bacayuk/app/widget/quickalert_view.dart';
 import 'package:bacayuk/app/widget/third_auth.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:quickalert/quickalert.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);

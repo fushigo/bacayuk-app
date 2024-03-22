@@ -27,6 +27,7 @@ class HomeController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
+    log("UserToken: $token");
     await getUserData();
     await getPopularBooks();
   }
@@ -36,7 +37,6 @@ class HomeController extends GetxController {
       loading(true);
       final decodedToken = await JwtConverter.jwtDecode(token);
       String userId = decodedToken["id"].toString();
-
       final responseUser = await ApiProvider.instance().get(Endpoint.user,
           queryParameters: {"uid": userId},
           options: Options(headers: {"authorization": "Bearer $token"}));

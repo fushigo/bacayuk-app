@@ -3,8 +3,6 @@ import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:flutter/material.dart';
-
 class ImageConvert {
   static Future<String?> imageToBase64(String imagePath) async {
     try {

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/book/views/book_view.dart';
 import 'package:bacayuk/app/modules/collection/views/collection_view.dart';
 import 'package:bacayuk/app/modules/history/views/history_view.dart';
@@ -41,9 +42,9 @@ class LayoutView extends GetView<LayoutController> {
         bottomNavigationBar: Obx(() => Container(
               decoration: const BoxDecoration(boxShadow: [
                 BoxShadow(
-                  color: Colors.white,
+                  color: Color.fromARGB(47, 0, 0, 0),
                   spreadRadius: 1,
-                  blurRadius: 5,
+                  blurRadius: 30,
                   offset: Offset(0, 3),
                 ),
               ]),
@@ -54,7 +55,7 @@ class LayoutView extends GetView<LayoutController> {
                 height: heightBody * 0.065,
                 index: controller.tabIndex.value,
                 backgroundColor: Colors.transparent,
-                buttonBackgroundColor: Colors.blue.shade900,
+                buttonBackgroundColor: GlobalVariable.primary,
                 color: Colors.blue.shade900,
                 onTap: (value) {
                   log("Nav index: ${value.toString()}");

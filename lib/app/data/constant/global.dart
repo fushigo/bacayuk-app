@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class GlobalVariable {
@@ -9,6 +10,7 @@ class GlobalVariable {
   static double textlg = 16;
   static String fontPoppins = "Poppins";
   static String fontSignika = "Signika";
+  static Color primary = Colors.blue.shade900;
 }
 
 class GlobalOrientation {

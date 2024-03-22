@@ -3,7 +3,7 @@ version: 1.0.0+1
 publish_to: none
 description: Project Aplikasi Perpustakaan Digital.
 environment:
-  sdk: '>=3.2.3 <4.0.0'
+  sdk: ">=3.2.3 <4.0.0"
 
 dependencies:
   another_flutter_splash_screen: ^1.2.0
@@ -52,4 +52,3 @@ flutter_launcher_icons:
   android: launcher_icon
   image_path: asset/image/bacayuk_lg.png
   ios: true
-

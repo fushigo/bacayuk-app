@@ -3,7 +3,6 @@ import 'package:bacayuk/app/data/model/response_login.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
-import 'package:bacayuk/app/widget/quickalert_view.dart';
 import 'package:bacayuk/app/widget/snackbar.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:flutter/material.dart';

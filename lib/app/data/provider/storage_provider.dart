@@ -24,6 +24,7 @@ class StorageKey {
   static const String token = "token";
   static const String profileStatus = "profileStatus";
   static const String userId = "userId";
+  static const String pinjamtoken = "pinjamtoken";
 }
 
 // class StorageProvider {

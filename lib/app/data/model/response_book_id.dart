@@ -1,9 +1,3 @@
-/// message : "Book found successfully"
-/// data : {"BukuID":5,"Judul":"Bahasa Indonesia Kelas XI","Penulis":"Suherli, Maman Suryaman, Aji Septiaji, Istiqomah","Penerbit":"Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud","TahunTerbit":2017,"Sinopsis":"Buku pelajaran Bahasa Indonesia untuk Kelas X","Cover":"iVBORw0KGgoAAAANSUhEUgAAALoAAAD6CAIAAACZNMrKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAdXRob3IANjgsIDAsIDEwMSwgMCwgMTA4LCAwLCAxMDgsIDAsIDAsIDDmRm2eAAAANXpUWHR1bmtub3duAABIie3GsQkAIAwAsFd6QAepDv3/sk6CLwiBDKnOqH0y1tXPAQAAgO8Nv02VLhdvx9QAAAAmdEVYdHhtcDpDcmVhdGVEYXRlADIwMjAtMTAtMzBUMTQ6NTE6MTIuNzc4WVWzsQAAAABJRU5ErkJggg==","File":"JVBERi0xLjQKJcfsj6IKNiAwIG9iago8PC9MZW5ndGggNyAwIFIvRmlsdGVyIC9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nO1QOw7CMAzdcwqfwHWcOCU7EnPLwAEQgqEFAQPXJwnNBwQ3QBlsP/s9v/wMCBuIAoDNEQ1MkEyNUQzQUE3QTgwNEQyQzI+PEI4OENDMTcxODg4QzRENTJBMjVEM0FBN0E4MDREMkMyPl0KPj4Kc3RhcnR4cmVmCjIzMjA4MjkKJSVFT0YK","createdAt":"2024-03-16T04:31:19.934Z","updatedAt":"2024-03-16T09:22:46.425Z","peminjaman":[{"PeminjamanID":1}],"bookmark":[{"KoleksiID":1}],"historyBaca":[{"HistoryBacaID":1,"Status":"reading","UserID":1,"BukuID":5,"createdAt":"2024-03-17T00:29:58.752Z","updatedAt":"2024-03-17T00:29:41.354Z"}],"ulasanBuku":[{"UlasanID":1,"UserID":1,"BukuID":5,"Ulasan":"Buku ini sangat bagus","Rating":5,"createdAt":"2024-03-17T06:57:13.042Z","updatedAt":"2024-03-17T06:56:41.234Z"}],"genreRelasi":[{"Genre":{"Nama":"Education"}}]}
-/// jmlhPeminjaman : 1
-/// jmlahDibaca : 1
-/// jmlahKoleksi : 1
-
 class ResponseBookId {
   ResponseBookId({
       this.message, 
@@ -14,13 +8,13 @@ class ResponseBookId {
 
   ResponseBookId.fromJson(dynamic json) {
     message = json['message'];
-    data = json['data'] != null ? DataBookId.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
     jmlhPeminjaman = json['jmlhPeminjaman'];
     jmlahDibaca = json['jmlahDibaca'];
     jmlahKoleksi = json['jmlahKoleksi'];
   }
   String? message;
-  DataBookId? data;
+  Data? data;
   int? jmlhPeminjaman;
   int? jmlahDibaca;
   int? jmlahKoleksi;
@@ -39,24 +33,8 @@ class ResponseBookId {
 
 }
 
-/// BukuID : 5
-/// Judul : "Bahasa Indonesia Kelas XI"
-/// Penulis : "Suherli, Maman Suryaman, Aji Septiaji, Istiqomah"
-/// Penerbit : "Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud"
-/// TahunTerbit : 2017
-/// Sinopsis : "Buku pelajaran Bahasa Indonesia untuk Kelas X"
-/// Cover : "iVBORw0KGgoAAAANSUhEUgAAALoAAAD6CAIAAACZNMrKAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1MAAA6mAAADqYAAAXcJy6UTwAAAAGYktHRAD/AP8A/6C9p5MAdXRob3IANjgsIDAsIDEwMSwgMCwgMTA4LCAwLCAxMDgsIDAsIDAsIDDmRm2eAAAANXpUWHR1bmtub3duAABIie3GsQkAIAwAsFd6QAepDv3/sk6CLwiBDKnOqH0y1tXPAQAAgO8Nv02VLhdvx9QAAAAmdEVYdHhtcDpDcmVhdGVEYXRlADIwMjAtMTAtMzBUMTQ6NTE6MTIuNzc4WVWzsQAAAABJRU5ErkJggg=="
-/// File : "JVBERi0xLjQKJcfsj6IKNiAwIG9iago8PC9MZW5ndGggNyAwIFIvRmlsdGVyIC9GbGF0ZURlY29kZT4+CnN0cmVhbQp4nO1QOw7CMAzdcwqfwHWcOCU7EnPLwAEQgqEFAQPXJwnNBwQ3QBlsP/s9v/wMCBuIAoDNEQ1MkEyNUQzQUE3QTgwNEQyQzI+PEI4OENDMTcxODg4QzRENTJBMjVEM0FBN0E4MDREMkMyPl0KPj4Kc3RhcnR4cmVmCjIzMjA4MjkKJSVFT0YK"
-/// createdAt : "2024-03-16T04:31:19.934Z"
-/// updatedAt : "2024-03-16T09:22:46.425Z"
-/// peminjaman : [{"PeminjamanID":1}]
-/// bookmark : [{"KoleksiID":1}]
-/// historyBaca : [{"HistoryBacaID":1,"Status":"reading","UserID":1,"BukuID":5,"createdAt":"2024-03-17T00:29:58.752Z","updatedAt":"2024-03-17T00:29:41.354Z"}]
-/// ulasanBuku : [{"UlasanID":1,"UserID":1,"BukuID":5,"Ulasan":"Buku ini sangat bagus","Rating":5,"createdAt":"2024-03-17T06:57:13.042Z","updatedAt":"2024-03-17T06:56:41.234Z"}]
-/// genreRelasi : [{"Genre":{"Nama":"Education"}}]
-
-class DataBookId {
-  DataBookId({
+class Data {
+  Data({
       this.bukuID, 
       this.judul, 
       this.penulis, 
@@ -64,16 +42,16 @@ class DataBookId {
       this.tahunTerbit, 
       this.sinopsis, 
       this.cover, 
-      this.file, 
       this.createdAt, 
       this.updatedAt, 
       this.peminjaman, 
-      this.bookmark, 
-      this.historyBaca, 
+      this.koleksiPribadi, 
       this.ulasanBuku, 
-      this.genreRelasi,});
+      this.historyBaca, 
+      this.genreRelasi, 
+      this.file,});
 
-  DataBookId.fromJson(dynamic json) {
+  Data.fromJson(dynamic json) {
     bukuID = json['BukuID'];
     judul = json['Judul'];
     penulis = json['Penulis'];
@@ -81,7 +59,6 @@ class DataBookId {
     tahunTerbit = json['TahunTerbit'];
     sinopsis = json['Sinopsis'];
     cover = json['Cover'];
-    file = json['File'];
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     if (json['peminjaman'] != null) {
@@ -90,16 +67,10 @@ class DataBookId {
         peminjaman?.add(Peminjaman.fromJson(v));
       });
     }
-    if (json['bookmark'] != null) {
-      bookmark = [];
-      json['bookmark'].forEach((v) {
-        bookmark?.add(Bookmark.fromJson(v));
-      });
-    }
-    if (json['historyBaca'] != null) {
-      historyBaca = [];
-      json['historyBaca'].forEach((v) {
-        historyBaca?.add(HistoryBaca.fromJson(v));
+    if (json['koleksiPribadi'] != null) {
+      koleksiPribadi = [];
+      json['koleksiPribadi'].forEach((v) {
+        koleksiPribadi?.add(KoleksiPribadi.fromJson(v));
       });
     }
     if (json['ulasanBuku'] != null) {
@@ -108,10 +79,22 @@ class DataBookId {
         ulasanBuku?.add(UlasanBuku.fromJson(v));
       });
     }
+    if (json['historyBaca'] != null) {
+      historyBaca = [];
+      json['historyBaca'].forEach((v) {
+        historyBaca?.add(HistoryBaca.fromJson(v));
+      });
+    }
     if (json['genreRelasi'] != null) {
       genreRelasi = [];
       json['genreRelasi'].forEach((v) {
         genreRelasi?.add(GenreRelasi.fromJson(v));
+      });
+    }
+    if (json['file'] != null) {
+      file = [];
+      json['file'].forEach((v) {
+        file?.add(File.fromJson(v));
       });
     }
   }
@@ -122,14 +105,14 @@ class DataBookId {
   int? tahunTerbit;
   String? sinopsis;
   String? cover;
-  String? file;
   String? createdAt;
   String? updatedAt;
   List<Peminjaman>? peminjaman;
-  List<Bookmark>? bookmark;
-  List<HistoryBaca>? historyBaca;
+  List<KoleksiPribadi>? koleksiPribadi;
   List<UlasanBuku>? ulasanBuku;
+  List<HistoryBaca>? historyBaca;
   List<GenreRelasi>? genreRelasi;
+  List<File>? file;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -140,30 +123,66 @@ class DataBookId {
     map['TahunTerbit'] = tahunTerbit;
     map['Sinopsis'] = sinopsis;
     map['Cover'] = cover;
-    map['File'] = file;
     map['createdAt'] = createdAt;
     map['updatedAt'] = updatedAt;
     if (peminjaman != null) {
       map['peminjaman'] = peminjaman?.map((v) => v.toJson()).toList();
     }
-    if (bookmark != null) {
-      map['bookmark'] = bookmark?.map((v) => v.toJson()).toList();
-    }
-    if (historyBaca != null) {
-      map['historyBaca'] = historyBaca?.map((v) => v.toJson()).toList();
+    if (koleksiPribadi != null) {
+      map['koleksiPribadi'] = koleksiPribadi?.map((v) => v.toJson()).toList();
     }
     if (ulasanBuku != null) {
       map['ulasanBuku'] = ulasanBuku?.map((v) => v.toJson()).toList();
     }
+    if (historyBaca != null) {
+      map['historyBaca'] = historyBaca?.map((v) => v.toJson()).toList();
+    }
     if (genreRelasi != null) {
       map['genreRelasi'] = genreRelasi?.map((v) => v.toJson()).toList();
+    }
+    if (file != null) {
+      map['file'] = file?.map((v) => v.toJson()).toList();
     }
     return map;
   }
 
 }
 
-/// Genre : {"Nama":"Education"}
+/// FileID : 1
+/// Nama : "BAB 1"
+/// File : "sdsdsdjwnwjnjwjwn"
+/// BukuID : 1
+
+class File {
+  File({
+      this.fileID, 
+      this.nama, 
+      this.file, 
+      this.bukuID,});
+
+  File.fromJson(dynamic json) {
+    fileID = json['FileID'];
+    nama = json['Nama'];
+    file = json['File'];
+    bukuID = json['BukuID'];
+  }
+  int? fileID;
+  String? nama;
+  String? file;
+  int? bukuID;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['FileID'] = fileID;
+    map['Nama'] = nama;
+    map['File'] = file;
+    map['BukuID'] = bukuID;
+    return map;
+  }
+
+}
+
+/// Genre : {"Nama":"Edukasi"}
 
 class GenreRelasi {
   GenreRelasi({
@@ -184,7 +203,7 @@ class GenreRelasi {
 
 }
 
-/// Nama : "Education"
+/// Nama : "Edukasi"
 
 class Genre {
   Genre({
@@ -203,13 +222,57 @@ class Genre {
 
 }
 
-/// UlasanID : 1
+/// HistoryBacaID : 1
+/// Status : "reading"
 /// UserID : 1
-/// BukuID : 5
-/// Ulasan : "Buku ini sangat bagus"
+/// BukuID : 1
+/// createdAt : "2024-03-20T22:36:20.133Z"
+/// updatedAt : "2024-03-20T22:35:30.377Z"
+
+class HistoryBaca {
+  HistoryBaca({
+      this.historyBacaID, 
+      this.status, 
+      this.userID, 
+      this.bukuID, 
+      this.createdAt, 
+      this.updatedAt,});
+
+  HistoryBaca.fromJson(dynamic json) {
+    historyBacaID = json['HistoryBacaID'];
+    status = json['Status'];
+    userID = json['UserID'];
+    bukuID = json['BukuID'];
+    createdAt = json['createdAt'];
+    updatedAt = json['updatedAt'];
+  }
+  int? historyBacaID;
+  String? status;
+  int? userID;
+  int? bukuID;
+  String? createdAt;
+  String? updatedAt;
+
+  Map<String, dynamic> toJson() {
+    final map = <String, dynamic>{};
+    map['HistoryBacaID'] = historyBacaID;
+    map['Status'] = status;
+    map['UserID'] = userID;
+    map['BukuID'] = bukuID;
+    map['createdAt'] = createdAt;
+    map['updatedAt'] = updatedAt;
+    return map;
+  }
+
+}
+
+/// UlasanID : 1
+/// UserID : 2
+/// BukuID : 1
+/// Ulasan : "Wah bagus sekali"
 /// Rating : 5
-/// createdAt : "2024-03-17T06:57:13.042Z"
-/// updatedAt : "2024-03-17T06:56:41.234Z"
+/// createdAt : "2024-03-20T22:37:30.042Z"
+/// updatedAt : "2024-03-20T22:36:49.775Z"
 
 class UlasanBuku {
   UlasanBuku({
@@ -252,57 +315,13 @@ class UlasanBuku {
 
 }
 
-/// HistoryBacaID : 1
-/// Status : "reading"
-/// UserID : 1
-/// BukuID : 5
-/// createdAt : "2024-03-17T00:29:58.752Z"
-/// updatedAt : "2024-03-17T00:29:41.354Z"
-
-class HistoryBaca {
-  HistoryBaca({
-      this.historyBacaID, 
-      this.status, 
-      this.userID, 
-      this.bukuID, 
-      this.createdAt, 
-      this.updatedAt,});
-
-  HistoryBaca.fromJson(dynamic json) {
-    historyBacaID = json['HistoryBacaID'];
-    status = json['Status'];
-    userID = json['UserID'];
-    bukuID = json['BukuID'];
-    createdAt = json['createdAt'];
-    updatedAt = json['updatedAt'];
-  }
-  int? historyBacaID;
-  String? status;
-  int? userID;
-  int? bukuID;
-  String? createdAt;
-  String? updatedAt;
-
-  Map<String, dynamic> toJson() {
-    final map = <String, dynamic>{};
-    map['HistoryBacaID'] = historyBacaID;
-    map['Status'] = status;
-    map['UserID'] = userID;
-    map['BukuID'] = bukuID;
-    map['createdAt'] = createdAt;
-    map['updatedAt'] = updatedAt;
-    return map;
-  }
-
-}
-
 /// KoleksiID : 1
 
-class Bookmark {
-  Bookmark({
+class KoleksiPribadi {
+  KoleksiPribadi({
       this.koleksiID,});
 
-  Bookmark.fromJson(dynamic json) {
+  KoleksiPribadi.fromJson(dynamic json) {
     koleksiID = json['KoleksiID'];
   }
   int? koleksiID;
@@ -315,7 +334,7 @@ class Bookmark {
 
 }
 
-/// PeminjamanID : 1
+/// PeminjamanID : 6
 
 class Peminjaman {
   Peminjaman({

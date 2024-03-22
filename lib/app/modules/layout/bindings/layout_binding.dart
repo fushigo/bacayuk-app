@@ -1,6 +1,5 @@
 import 'package:bacayuk/app/modules/book/controllers/book_controller.dart';
 import 'package:bacayuk/app/modules/collection/controllers/collection_controller.dart';
-import 'package:bacayuk/app/modules/completed_profile/controllers/completed_profile_controller.dart';
 import 'package:bacayuk/app/modules/history/controllers/history_controller.dart';
 import 'package:bacayuk/app/modules/home/controllers/home_controller.dart';
 import 'package:bacayuk/app/modules/profile/controllers/profile_controller.dart';

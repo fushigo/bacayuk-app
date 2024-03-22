@@ -16,6 +16,18 @@ class BookDetailView extends GetView<BookDetailController> {
         MediaQuery.of(context).padding.bottom;
 
     return Scaffold(
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 0),
+        child: FloatingActionButton.small(
+          onPressed: () => Get.back(),
+          backgroundColor: Colors.black12,
+          child: const Icon(
+            Icons.close,
+            color: Colors.white,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
           child: Obx(
         () => Container(
@@ -34,7 +46,7 @@ class BookDetailView extends GetView<BookDetailController> {
                         children: [
                           Container(
                               width: widthBody,
-                              height: heightBody * 0.35,
+                              height: heightBody * 0.4,
                               color: Colors.blue,
                               child: Obx(
                                 () => FittedBox(
@@ -48,7 +60,9 @@ class BookDetailView extends GetView<BookDetailController> {
                               )),
                           Container(
                               width: widthBody,
-                              padding: const EdgeInsets.only(left: 10, top: 20),
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: widthBody * 0.05,
+                                  vertical: heightBody * 0.015),
                               height: heightBody * 0.1,
                               color: Colors.black26,
                               child: Obx(
@@ -69,7 +83,7 @@ class BookDetailView extends GetView<BookDetailController> {
                       ),
                     ),
                     Positioned(
-                      top: heightBody * 0.32,
+                      top: heightBody * 0.36,
                       child: Container(
                         width: widthBody,
                         decoration: const BoxDecoration(
@@ -128,8 +142,7 @@ class BookDetailView extends GetView<BookDetailController> {
                                             Text(
                                               controller.jmlahDibaca.value
                                                       .isNotEmpty
-                                                  ? controller
-                                                      .jmlhPeminjam.value
+                                                  ? controller.jmlahDibaca.value
                                                   : "0",
                                               textAlign: TextAlign.center,
                                               style: TextStyle(
@@ -291,6 +304,24 @@ class BookDetailView extends GetView<BookDetailController> {
                                         ),
                                         SizedBox(
                                             width: widthBody,
+                                            height: heightBody * 0.04,
+                                            child: Obx(
+                                              () => Text(
+                                                controller.tahunTerbit.value
+                                                        .isNotEmpty
+                                                    ? "Tahun: ${controller.tahunTerbit.value}"
+                                                    : "",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize:
+                                                      GlobalVariable.textbase,
+                                                  fontFamily: GlobalVariable
+                                                      .fontPoppins,
+                                                ),
+                                              ),
+                                            )),
+                                        SizedBox(
+                                            width: widthBody,
                                             height: heightBody * 0.1,
                                             child: Obx(
                                               () => Text(
@@ -313,7 +344,7 @@ class BookDetailView extends GetView<BookDetailController> {
                                           child: ButtonWidget(
                                               text: "Mulai Baca",
                                               onPressed: () {
-                                                controller.readingBook();
+                                                controller.validasiPeminjaman();
                                               },
                                               horizontal: widthBody * 0.3,
                                               vertical: heightBody * 0.015),
