@@ -33,9 +33,7 @@ class QuickAlertWidget {
         textInputAction: TextInputAction.next,
         keyboardType: TextInputType.phone,
         readOnly: true,
-        onTap: () {
-          
-        },
+        onTap: () {},
       ),
       title: title,
       text: text,

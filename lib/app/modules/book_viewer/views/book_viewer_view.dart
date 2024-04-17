@@ -27,12 +27,8 @@ class BookViewerView extends GetView<BookViewerController> {
             width: widthBody,
             height: heightBody * 0.9,
             child: Obx(() => controller.loading.value
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                    ),
+                ? const Center(
+                    child: CircularProgressIndicator(),
                   )
                 : pdfViewer(controller.pdfbase64.value)),
           ),

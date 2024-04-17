@@ -122,17 +122,18 @@ class BookDetailView extends GetView<BookDetailController> {
                                                   fontWeight: FontWeight.bold,
                                                   fontSize:
                                                       GlobalVariable.heading_2,
-                                                  fontFamily:
-                                                      GlobalVariable.fontPoppins,
+                                                  fontFamily: GlobalVariable
+                                                      .fontPoppins,
                                                 ),
                                               ),
                                               Text(
                                                 "Dipinjam",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: GlobalVariable.textmd,
-                                                  fontFamily:
-                                                      GlobalVariable.fontSignika,
+                                                  fontSize:
+                                                      GlobalVariable.textmd,
+                                                  fontFamily: GlobalVariable
+                                                      .fontSignika,
                                                 ),
                                               ),
                                             ],
@@ -145,24 +146,26 @@ class BookDetailView extends GetView<BookDetailController> {
                                               Text(
                                                 controller.jmlahDibaca.value
                                                         .isNotEmpty
-                                                    ? controller.jmlahDibaca.value
+                                                    ? controller
+                                                        .jmlahDibaca.value
                                                     : "0",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize:
                                                       GlobalVariable.heading_2,
-                                                  fontFamily:
-                                                      GlobalVariable.fontPoppins,
+                                                  fontFamily: GlobalVariable
+                                                      .fontPoppins,
                                                 ),
                                               ),
                                               Text(
                                                 "Dibaca",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: GlobalVariable.textmd,
-                                                  fontFamily:
-                                                      GlobalVariable.fontSignika,
+                                                  fontSize:
+                                                      GlobalVariable.textmd,
+                                                  fontFamily: GlobalVariable
+                                                      .fontSignika,
                                                 ),
                                               ),
                                             ],
@@ -175,24 +178,26 @@ class BookDetailView extends GetView<BookDetailController> {
                                               Text(
                                                 controller.jmlhKoleksi.value
                                                         .isNotEmpty
-                                                    ? controller.jmlhKoleksi.value
+                                                    ? controller
+                                                        .jmlhKoleksi.value
                                                     : "0",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize:
                                                       GlobalVariable.heading_2,
-                                                  fontFamily:
-                                                      GlobalVariable.fontPoppins,
+                                                  fontFamily: GlobalVariable
+                                                      .fontPoppins,
                                                 ),
                                               ),
                                               Text(
                                                 "Dikoleksi",
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontSize: GlobalVariable.textmd,
-                                                  fontFamily:
-                                                      GlobalVariable.fontSignika,
+                                                  fontSize:
+                                                      GlobalVariable.textmd,
+                                                  fontFamily: GlobalVariable
+                                                      .fontSignika,
                                                 ),
                                               ),
                                             ],
@@ -281,13 +286,14 @@ class BookDetailView extends GetView<BookDetailController> {
                                                                     .symmetric(
                                                                     horizontal:
                                                                         20,
-                                                                    vertical: 5),
+                                                                    vertical:
+                                                                        5),
                                                             child: Text(
                                                               dataGenre
                                                                   .genre!.nama!,
                                                               style: TextStyle(
-                                                                  color:
-                                                                      Colors.grey,
+                                                                  color: Colors
+                                                                      .grey,
                                                                   fontFamily:
                                                                       GlobalVariable
                                                                           .fontSignika,
@@ -330,7 +336,8 @@ class BookDetailView extends GetView<BookDetailController> {
                                                 () => Text(
                                                   controller.sinopsis.value
                                                           .isNotEmpty
-                                                      ? controller.sinopsis.value
+                                                      ? controller
+                                                          .sinopsis.value
                                                       : "",
                                                   style: TextStyle(
                                                     fontSize:
@@ -344,19 +351,80 @@ class BookDetailView extends GetView<BookDetailController> {
                                             height: heightBody * 0.03,
                                           ),
                                           Center(
-                                            child: ButtonWidget(
-                                                text: "Mulai Baca",
-                                                onPressed: () {
-                                                  controller.validasiPeminjaman();
-                                                },
-                                                horizontal: widthBody * 0.3,
-                                                vertical: heightBody * 0.015),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                ButtonWidget(
+                                                    text: "Mulai Baca",
+                                                    onPressed: () {
+                                                      controller
+                                                          .validasiPeminjaman();
+                                                    },
+                                                    horizontal: widthBody * 0.2,
+                                                    vertical:
+                                                        heightBody * 0.015),
+                                                SizedBox(
+                                                  width: widthBody * 0.05,
+                                                ),
+                                                IconButton(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
+                                                    color: Colors.white,
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                            backgroundColor:
+                                                                Colors.blue
+                                                                    .shade900),
+                                                    onPressed: () {
+                                                      controller.addKoleksi();
+                                                    },
+                                                    icon: const Icon(
+                                                        Icons.bookmark_add))
+                                              ],
+                                            ),
                                           )
                                         ],
                                       ),
                                     ),
-                                    Container(
-                                      color: Colors.red,
+                                    SizedBox(
+                                      width: widthBody,
+                                      child: ListView.separated(
+                                          scrollDirection: Axis.vertical,
+                                          itemBuilder: (context, index) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                controller.fileId.value =
+                                                    controller
+                                                        .dataFileBookId[index]
+                                                        .fileID!;
+                                                controller.validasiPeminjaman();
+                                              },
+                                              child: Container(
+                                                width: widthBody,
+                                                alignment: Alignment.centerLeft,
+                                                height: 50,
+                                                child: Text(
+                                                  controller
+                                                      .dataFileBookId[index]
+                                                      .nama!,
+                                                  style: TextStyle(
+                                                      fontFamily: GlobalVariable
+                                                          .fontPoppins,
+                                                      fontSize:
+                                                          GlobalVariable.textlg,
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                          separatorBuilder: (context, index) {
+                                            return const Divider();
+                                          },
+                                          itemCount:
+                                              controller.dataFileBookId.length),
                                     )
                                   ],
                                 ),

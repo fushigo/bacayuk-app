@@ -1,6 +1,10 @@
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/book/controllers/book_controller.dart';
+import 'package:bacayuk/app/routes/app_pages.dart';
+import 'package:bacayuk/app/widget/viewers/widget_image_memory.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:get/get.dart';
 
@@ -12,96 +16,137 @@ class BookView extends GetView<BookController> {
     final heightBody = MediaQuery.of(context).size.height;
     return Scaffold(
         body: SafeArea(
-      child: Container(
-        width: widthBody,
-        height: heightBody,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizedBox(
-                width: widthBody,
-                child: TabBar(
-                  padding: const EdgeInsets.all(0),
-                  indicator: const BoxDecoration(),
-                  controller: controller.tabController,
-                  tabs: [
-                    Tab(
-                      child: Text(
-                        "Komik",
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontSignika,
-                            fontSize: GlobalVariable.textlg),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "Novel",
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontSignika,
-                            fontSize: GlobalVariable.textlg),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        "Pendidikan",
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontSignika,
-                            fontSize: GlobalVariable.textlg),
-                      ),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                width: widthBody,
-                height: heightBody,
-                padding:
-                    const EdgeInsets.all(0),
-                child: TabBarView(
-                  controller: controller.tabController,
+      child: SizedBox(
+          width: widthBody,
+          height: heightBody,
+          child: Obx(() => controller.loading.value == false
+              ? Stack(
                   children: [
-                    Container(
-                        width: widthBody,
-                        height: heightBody,
-                        alignment: Alignment.topCenter,
-                        child: Obx(() => controller.dataGenreBuku.isNotEmpty ? Column(
-                          children: [
-                            TabBar(
-                                padding: const EdgeInsets.all(0),
-                                controller: controller.tabGenreController.value,
-                                tabs: controller.dataGenreBuku
-                                    .map((dataGenre) => Tab(
-                                  child: Text(dataGenre.nama!),
-                                ))
-                                    .toList()),
-                            Container(
-                                width: widthBody,
-                                padding: const EdgeInsets.symmetric(horizontal: 10),
-                                child: TabBarView(
-                                    controller: controller.tabGenreController.value,
-                                    children: controller.dataGenreBuku
-                                        .map((data) => SizedBox(
-                                      width: widthBody,
-                                      height: 300,
-                                      child: Text(data.nama!),
-                                    ))
-                                        .toList())
-                            )
-                          ],
-                        ): const CircularProgressIndicator())),
-                    Container(
-                      color: Colors.red,
+                    SizedBox(
+                      width: widthBody,
+                      height: heightBody * 0.15,
+                      child: Column(
+                        children: [
+                          TabBar(
+                              tabAlignment: TabAlignment.center,
+                              onTap: (index) {
+                                controller.onTabBook(index);
+                              },
+                              indicator: const BoxDecoration(),
+                              dividerHeight: 0,
+                              controller:
+                                  controller.tabKategoriController.value,
+                              isScrollable: true,
+                              tabs: controller.dataKategoriBuku
+                                  .map((kategori) => Tab(
+                                        text: kategori.namaKategori,
+                                      ))
+                                  .toList()),
+                          TabBar(
+                              controller: controller.tabGenreController.value,
+                              isScrollable: true,
+                              onTap: (index) {
+                                controller.onTabGenre(index);
+                              },
+                              tabs: controller.dataGenreBuku
+                                  .map((genre) => Tab(
+                                        text: genre.nama,
+                                      ))
+                                  .toList())
+                        ],
+                      ),
                     ),
-                    Container(
-                      color: Colors.green,
+                    Positioned(
+                      top: heightBody * 0.12,
+                      child: SizedBox(
+                          width: widthBody,
+                          height: heightBody,
+                          child: Obx(
+                            () => RefreshIndicator(
+                              onRefresh: () async {
+                                controller.syncBookData();
+                                controller.update();
+                              },
+                              child: ListView.builder(
+                                scrollDirection: Axis.vertical,
+                                itemCount: controller.dataCount.value,
+                                itemBuilder: (context, index) {
+                                  return GestureDetector(
+                                    onTap: () => Get.toNamed(Routes.BOOK_DETAIL,
+                                        parameters: {
+                                          "id": controller
+                                              .dataBukuKategori[index].bukuID
+                                              .toString()
+                                        }),
+                                    child: Container(
+                                      width: widthBody,
+                                      height: 150,
+                                      margin: const EdgeInsets.all(5),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10, vertical: 5),
+                                      // color: Colors.blue,
+                                      child: Row(
+                                        children: [
+                                          SizedBox(
+                                              child: Image(
+                                                  width: 105,
+                                                  height: 200,
+                                                  fit: BoxFit.fill,
+                                                  image: base64Image(controller
+                                                      .dataBukuKategori[index]
+                                                      .cover!))),
+                                          Container(
+                                              width: widthBody * 0.68,
+                                              // color: Colors.red,
+                                              padding: const EdgeInsets.all(5),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    controller
+                                                        .dataBukuKategori[index]
+                                                        .judul
+                                                        .toString(),
+                                                    textAlign: TextAlign.start,
+                                                    style: TextStyle(
+                                                        fontSize: GlobalVariable
+                                                            .textlg,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                        fontFamily:
+                                                            GlobalVariable
+                                                                .fontPoppins),
+                                                  ),
+                                                  Text(
+                                                    controller
+                                                        .dataBukuKategori[index]
+                                                        .sinopsis
+                                                        .toString(),
+                                                    maxLines: 4,
+                                                    style: TextStyle(
+                                                        overflow:
+                                                            TextOverflow.clip,
+                                                        fontSize: GlobalVariable
+                                                            .textbase,
+                                                        fontFamily:
+                                                            GlobalVariable
+                                                                .fontPoppins),
+                                                  )
+                                                ],
+                                              ))
+                                        ],
+                                      ),
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          )),
                     )
                   ],
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
+                )
+              : const Center(child: CircularProgressIndicator()))),
     ));
   }
 }

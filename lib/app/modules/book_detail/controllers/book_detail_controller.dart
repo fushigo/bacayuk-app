@@ -185,4 +185,41 @@ class BookDetailController extends GetxController
       log(e.toString());
     }
   }
+
+  Future<void> addKoleksi() async {
+    try {
+      final jwtDecoded = await JwtConverter.jwtDecode(token);
+      final userId = jwtDecoded["id"];
+
+      final validasiKoleksi = await ApiProvider.instance().get(
+          "${Endpoint.koleksi}/validasi",
+          queryParameters: {"userid": userId, "bukuid": bookId});
+
+      if (validasiKoleksi.statusCode == 200 &&
+          validasiKoleksi.statusMessage == "found") {
+        QuickAlert.show(
+            context: Get.context!,
+            type: QuickAlertType.info,
+            autoCloseDuration: const Duration(seconds: 3),
+            title: "Operasi Gagal!",
+            text: "Buku sudah berada di dalam daftar koleksi pribadi.");
+      } else {
+        log("masokk");
+        final response = await ApiProvider.instance().post(Endpoint.koleksi,
+            data: ({"userid": userId, "bukuid": bookId}),
+            options: Options(headers: {"authorization": "Bearer $token"}));
+
+        if (response.statusCode == 201) {
+          QuickAlert.show(
+              context: Get.context!,
+              type: QuickAlertType.success,
+              autoCloseDuration: const Duration(seconds: 3),
+              title: "Operasi Berhasil!",
+              text: "Buku berhasil ditambahkan ke daftar koleksi pribadi.");
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
 }

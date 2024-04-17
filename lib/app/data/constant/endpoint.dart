@@ -1,7 +1,7 @@
 class Endpoint {
   // static const String baseUrlApi = "https://bacayuk-api.vercel.app/api/";
   // static const String baseUrlApi = "http://192.168.4.183:3000/api/";
-  static const String baseUrlApi = "http://192.168.99.120:3000/api/";
+  static const String baseUrlApi = "http://192.168.112.30:3000/api/";
 
   static const String login = "${baseUrlApi}auth/signin";
   static const String register = "${baseUrlApi}auth/signup";
@@ -14,4 +14,7 @@ class Endpoint {
   static const String peminjaman = "${baseUrlApi}peminjaman";
   static const String file = "${baseUrlApi}file";
   static const String genre = "${baseUrlApi}genre";
+  static const String kategori = "${baseUrlApi}kategori";
+  static const String history = "${baseUrlApi}historyBaca";
+  static const String koleksi = "${baseUrlApi}koleksi";
 }

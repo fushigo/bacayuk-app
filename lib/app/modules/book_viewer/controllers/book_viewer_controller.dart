@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:bacayuk/app/data/constant/endpoint.dart';
 import 'package:bacayuk/app/data/model/response_book_id.dart';
 import 'package:bacayuk/app/data/model/response_file_id.dart';
+import 'package:bacayuk/app/data/model/response_history_id.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
+import 'package:bacayuk/app/data/provider/jwt_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,7 @@ class BookViewerController extends GetxController {
     super.onInit();
     await getPdf();
     await getBookFile();
+    await createHistory();
   }
 
   @override
@@ -35,7 +38,8 @@ class BookViewerController extends GetxController {
   }
 
   @override
-  void onClose() {
+  void onClose() async {
+    await updateHistory();
     super.onClose();
   }
 
@@ -125,6 +129,60 @@ class BookViewerController extends GetxController {
     } catch (e) {
       loading(false);
       log('Error: ${e.toString()}');
+    }
+  }
+
+  Future<void> createHistory() async {
+    try {
+      final decodedToken = await JwtConverter.jwtDecode(token);
+      final userId = decodedToken["id"].toString();
+
+      final checkHistory = await ApiProvider.instance().get(Endpoint.history,
+          queryParameters: {"userid": userId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (checkHistory.statusCode == 200) {
+        final dataHistory = ResponseHistoryId.fromJson(checkHistory.data!);
+
+        if (dataHistory.total != 0) {
+          final history = await ApiProvider.instance().patch(Endpoint.history,
+              data: ({"status": "reading"}),
+              queryParameters: {"userid": userId, "bukuid": bookId},
+              options: Options(headers: {"authorization": "Bearer $token"}));
+
+          if (history.statusCode == 200) {
+            log("Success updating history");
+          }
+        } else {
+          final history = await ApiProvider.instance().post(Endpoint.history,
+              data: ({"userid": userId, "bukuid": bookId}),
+              options: Options(headers: {"authorization": "Bearer $token"}));
+
+          if (history.statusCode == 201) {
+            log("Success adding history");
+          }
+        }
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> updateHistory() async {
+    try {
+      final decodedToken = await JwtConverter.jwtDecode(token);
+      final userId = decodedToken["id"].toString();
+
+      final history = await ApiProvider.instance().patch(Endpoint.history,
+          data: ({"status": "pause"}),
+          queryParameters: {"userid": userId, "bukuid": bookId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (history.statusCode == 200) {
+        log("Success updating history");
+      }
+    } catch (e) {
+      log(e.toString());
     }
   }
 }

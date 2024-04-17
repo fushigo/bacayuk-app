@@ -21,57 +21,66 @@ class HomeView extends GetView<HomeController> {
     GlobalOrientation.orientationPotrait();
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          scrollDirection: Axis.vertical,
-          child: Container(
-            width: widthBody,
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            child: Column(
-              children: [
-                WidgetProfile(widthBody: widthBody, heightBody: heightBody),
-                SizedBox(height: heightBody * 0.03),
-                WidgetCarousel(widthBody: widthBody, heightBody: heightBody),
-                SizedBox(height: heightBody * 0.03),
-                WidgetKategoriRow(widthBody: widthBody, heightBody: heightBody),
-                SizedBox(height: heightBody * 0.03),
-                SizedBox(
-                  width: widthBody,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Rekomendasi",
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontSignika,
-                            fontSize: GlobalVariable.heading_3),
-                      ),
-                      SizedBox(height: heightBody * 0.02),
-                      SizedBox(
-                        width: widthBody,
-                        child: Obx(() => SizedBox(
-                            child: controller.dataBookPopular.isEmpty
-                                ? ShimmerWidget(widthBody, heightBody)
-                                : GridBookPopular(widthBody, heightBody))),
-                      ),
-                      Text(
-                        "Update Terbaru",
-                        style: TextStyle(
-                            fontFamily: GlobalVariable.fontSignika,
-                            fontSize: GlobalVariable.heading_3),
-                      ),
-                      SizedBox(height: heightBody * 0.03),
-                      SizedBox(
+        child: RefreshIndicator(
+          onRefresh: () async {
+            controller.getUserData();
+            controller.getPopularBooks();
+            controller.getTerbaruBook();
+            controller.update();
+          },
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Container(
+              width: widthBody,
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              child: Column(
+                children: [
+                  WidgetProfile(widthBody: widthBody, heightBody: heightBody),
+                  SizedBox(height: heightBody * 0.03),
+                  WidgetCarousel(widthBody: widthBody, heightBody: heightBody),
+                  SizedBox(height: heightBody * 0.03),
+                  WidgetKategoriRow(
+                      widthBody: widthBody, heightBody: heightBody),
+                  SizedBox(height: heightBody * 0.03),
+                  SizedBox(
+                    width: widthBody,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Rekomendasi",
+                          style: TextStyle(
+                              fontFamily: GlobalVariable.fontSignika,
+                              fontSize: GlobalVariable.heading_3),
+                        ),
+                        SizedBox(height: heightBody * 0.02),
+                        SizedBox(
                           width: widthBody,
-                          height: heightBody * 0.32,
-                          child: Obx(() => controller.dataBookTerbaru.isEmpty
-                              ? ShimmerWidget(widthBody, heightBody)
-                              : WidgetListBookTerbaru(
-                                  controller, widthBody, heightBody)))
-                    ],
-                  ),
-                )
-              ],
+                          child: Obx(() => SizedBox(
+                              child: controller.dataBookPopular.isEmpty
+                                  ? ShimmerWidget(widthBody, heightBody)
+                                  : GridBookPopular(widthBody, heightBody))),
+                        ),
+                        Text(
+                          "Update Terbaru",
+                          style: TextStyle(
+                              fontFamily: GlobalVariable.fontSignika,
+                              fontSize: GlobalVariable.heading_3),
+                        ),
+                        SizedBox(height: heightBody * 0.03),
+                        SizedBox(
+                            width: widthBody,
+                            height: heightBody * 0.32,
+                            child: Obx(() => controller.dataBookTerbaru.isEmpty
+                                ? ShimmerWidget(widthBody, heightBody)
+                                : WidgetListBookTerbaru(
+                                    controller, widthBody, heightBody)))
+                      ],
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
