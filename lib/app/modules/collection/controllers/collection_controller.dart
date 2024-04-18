@@ -75,10 +75,11 @@ class CollectionController extends GetxController {
             QuickAlert.show(
                 context: Get.context!,
                 type: QuickAlertType.success,
+                autoCloseDuration: const Duration(seconds: 3),
                 title: "Berhasil Dihapus!",
                 text: "Buku berhasil dihapus dari daftar koleksi pribadi.");
-
-            Get.reload();
+            await getKoleksi();
+            update();
           }
         },
       );

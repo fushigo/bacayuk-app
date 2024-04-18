@@ -4,8 +4,14 @@ import '../modules/boarding/bindings/boarding_binding.dart';
 import '../modules/boarding/views/boarding_view.dart';
 import '../modules/book/bindings/book_binding.dart';
 import '../modules/book/views/book_view.dart';
+import '../modules/book_add/bindings/book_add_binding.dart';
+import '../modules/book_add/views/book_add_view.dart';
 import '../modules/book_detail/bindings/book_detail_binding.dart';
 import '../modules/book_detail/views/book_detail_view.dart';
+import '../modules/book_edit/bindings/book_edit_binding.dart';
+import '../modules/book_edit/views/book_edit_view.dart';
+import '../modules/book_management/bindings/book_management_binding.dart';
+import '../modules/book_management/views/book_management_view.dart';
 import '../modules/book_viewer/bindings/book_viewer_binding.dart';
 import '../modules/book_viewer/views/book_viewer_view.dart';
 import '../modules/collection/bindings/collection_binding.dart';
@@ -113,6 +119,21 @@ class AppPages {
       name: _Paths.BOOK_VIEWER,
       page: () => const BookViewerView(),
       binding: BookViewerBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_MANAGEMENT,
+      page: () => const BookManagementView(),
+      binding: BookManagementBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_ADD,
+      page: () => const BookAddView(),
+      binding: BookAddBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_EDIT,
+      page: () => const BookEditView(),
+      binding: BookEditBinding(),
     ),
   ];
 }

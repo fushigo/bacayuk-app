@@ -174,7 +174,7 @@ class Data {
 /// Nama : "BAB 3"
 
 class File {
-  File({
+  File(String value, {
       this.fileID, 
       this.nama,});
 
@@ -191,6 +191,8 @@ class File {
     map['Nama'] = nama;
     return map;
   }
+
+  lengthSync() {}
 
 }
 

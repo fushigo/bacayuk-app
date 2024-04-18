@@ -36,8 +36,7 @@ class CollectionView extends GetView<CollectionController> {
                 controller.update();
               },
               child: Obx(
-                () => controller.loading.value == false &&
-                        controller.dataKoleksi.isNotEmpty
+                () => controller.loading.value == false
                     ? Container(
                         width: widthBody,
                         height: heightBody,

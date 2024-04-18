@@ -6,6 +6,7 @@ import 'package:bacayuk/app/data/model/response_book_kategori.dart';
 import 'package:bacayuk/app/data/model/response_genre.dart';
 import 'package:bacayuk/app/data/model/response_kategori.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
+import 'package:bacayuk/app/data/provider/jwt_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,8 @@ class BookController extends GetxController with GetTickerProviderStateMixin {
   final tabBarGenreIndex = 0.obs;
   final dataCount = 0.obs;
 
+  final role = "".obs;
+
   final tabKategoriLength = 1.obs;
   final tabGenreLength = 1.obs;
 
@@ -42,6 +45,7 @@ class BookController extends GetxController with GetTickerProviderStateMixin {
         TabController(length: 3, vsync: this, initialIndex: 0));
     tabGenreController = Rx<TabController>(
         TabController(length: 1, vsync: this, initialIndex: 0));
+    await getRole();
     await getGenreBuku();
     await getKategoriBuku();
     await syncBookData();
@@ -166,5 +170,15 @@ class BookController extends GetxController with GetTickerProviderStateMixin {
     tabBarGenreIndex.value = index;
     await syncBookData();
     log("Tab Genre Index: ${tabBarGenreIndex.value.toString()}");
+  }
+
+  Future<void> getRole() async {
+    try {
+      final jwtDecoded = await JwtConverter.jwtDecode(token);
+      log("Data user: ${jwtDecoded.toString()}");
+      role.value = jwtDecoded["role"];
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }
