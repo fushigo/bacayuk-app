@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bacayuk/app/data/constant/endpoint.dart';
 import 'package:bacayuk/app/data/model/response_book_id.dart';
+import 'package:bacayuk/app/data/model/response_validasi_koleksi_user.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/jwt_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
@@ -195,27 +196,31 @@ class BookDetailController extends GetxController
           "${Endpoint.koleksi}/validasi",
           queryParameters: {"userid": userId, "bukuid": bookId});
 
-      if (validasiKoleksi.statusCode == 200 &&
-          validasiKoleksi.statusMessage == "found") {
-        QuickAlert.show(
-            context: Get.context!,
-            type: QuickAlertType.info,
-            autoCloseDuration: const Duration(seconds: 3),
-            title: "Operasi Gagal!",
-            text: "Buku sudah berada di dalam daftar koleksi pribadi.");
-      } else {
-        log("masokk");
-        final response = await ApiProvider.instance().post(Endpoint.koleksi,
-            data: ({"userid": userId, "bukuid": bookId}),
-            options: Options(headers: {"authorization": "Bearer $token"}));
+      if (validasiKoleksi.statusCode == 200) {
+        final result =
+            ResponseValidasiKoleksiUser.fromJson(validasiKoleksi.data!);
 
-        if (response.statusCode == 201) {
+        if (result.data != null) {
           QuickAlert.show(
               context: Get.context!,
-              type: QuickAlertType.success,
+              type: QuickAlertType.info,
               autoCloseDuration: const Duration(seconds: 3),
-              title: "Operasi Berhasil!",
-              text: "Buku berhasil ditambahkan ke daftar koleksi pribadi.");
+              title: "Operasi Gagal!",
+              text: "Buku sudah berada di dalam daftar koleksi pribadi.");
+        } else {
+          log("masokk");
+          final response = await ApiProvider.instance().post(Endpoint.koleksi,
+              data: ({"userid": userId, "bukuid": bookId}),
+              options: Options(headers: {"authorization": "Bearer $token"}));
+
+          if (response.statusCode == 201) {
+            QuickAlert.show(
+                context: Get.context!,
+                type: QuickAlertType.success,
+                autoCloseDuration: const Duration(seconds: 3),
+                title: "Operasi Berhasil!",
+                text: "Buku berhasil ditambahkan ke daftar koleksi pribadi.");
+          }
         }
       }
     } catch (e) {

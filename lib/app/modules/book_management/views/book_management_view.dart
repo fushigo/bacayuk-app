@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/viewers/widget_image_memory.dart';

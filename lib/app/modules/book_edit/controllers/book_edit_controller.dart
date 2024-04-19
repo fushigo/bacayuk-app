@@ -9,6 +9,7 @@ import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/viewers/snackbar.dart';
 import 'package:dio/dio.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -29,19 +30,24 @@ class BookEditController extends GetxController
 
   final GlobalKey<FormState> formKeyFile = GlobalKey<FormState>();
   final TextEditingController namaFileController = TextEditingController();
+  final TextEditingController filePickNameController = TextEditingController();
 
-  final dataFile = RxList<File>();
+  var dataFile = RxList<File>();
 
   final bookId = Get.parameters["id"];
   var imagePath = ''.obs;
   var imageSize = ''.obs;
   final profilePict = "".obs;
 
+  final filePath = ''.obs;
+  final filePick = "".obs;
+
   final loading = false.obs;
   final loadingButton = false.obs;
 
   final token = StorageProvider.read(StorageKey.token);
 
+  final fileLoading = false.obs;
   final count = 0.obs;
   @override
   void onInit() async {
@@ -148,11 +154,84 @@ class BookEditController extends GetxController
       if (response.statusCode == 200) {
         loadingButton(false);
         SnackBarWidget.snackBarSuccess("Berhasil mengubah buku!");
-        getBookData();
+        await getBookData();
         update();
       }
     } catch (e) {
       loadingButton(false);
+      log(e.toString());
+    }
+  }
+
+  Future<void> pickFile() async {
+    try {
+      final fileResult = await FilePicker.platform.pickFiles(
+          allowedExtensions: ["pdf"],
+          type: FileType.custom,
+          allowCompression: true,
+          allowMultiple: false);
+
+      if (fileResult != null) {
+        final file = fileResult.files.first;
+        log("Path file: ${file.path}");
+        filePath.value = file.path!;
+        filePickNameController.value = TextEditingValue(text: file.name);
+      }
+    } catch (e) {
+      log(e.toString());
+    }
+  }
+
+  Future<void> sendFile() async {
+    if (namaFileController.text.isEmpty ||
+        namaFileController.text.trim() == "") {
+      return SnackBarWidget.snackBarInfo("Nama file tidak boleh kosong");
+    }
+
+    if (filePath.value.isNotEmpty ||
+        filePath.value.trim() != "" ||
+        filePath.value != "") {
+      filePick.value = (await ImageConvert.imageToBase64(filePath.value))!;
+    } else if (filePath.value == "" && filePick.value == "") {
+      return SnackBarWidget.snackBarInfo("File buku tidak boleh kosong");
+    }
+
+    try {
+      fileLoading(true);
+      final response = await ApiProvider.instance().post(Endpoint.file,
+          data: ({
+            "nama": namaFileController.text.toString(),
+            "file": filePick.value.toString()
+          }),
+          queryParameters: {"bukuid": bookId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (response.statusCode == 201) {
+        await getBookData();
+        update();
+        fileLoading(false);
+      }
+    } catch (e) {
+      fileLoading(false);
+      log(e.toString());
+    }
+  }
+
+  Future<void> deleteFile(fileid) async {
+    log(fileid.toString());
+    try {
+      fileLoading(true);
+      final response = await ApiProvider.instance().delete(Endpoint.file,
+          queryParameters: {"id": fileid},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (response.statusCode == 200) {
+        await getBookData();
+        update();
+        fileLoading(false);
+      }
+    } catch (e) {
+      fileLoading(false);
       log(e.toString());
     }
   }

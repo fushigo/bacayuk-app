@@ -134,7 +134,7 @@ class BookEditView extends GetView<BookEditController> {
                                   ),
                                   SizedBox(
                                     width: widthBody,
-                                    height: heightBody * 0.45,
+                                    height: 400,
                                     child: Form(
                                       key: controller.formKey,
                                       child: Column(
@@ -144,7 +144,7 @@ class BookEditView extends GetView<BookEditController> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller:
                                                   controller.judulController,
@@ -186,7 +186,7 @@ class BookEditView extends GetView<BookEditController> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller:
                                                   controller.sinopsisController,
@@ -228,7 +228,7 @@ class BookEditView extends GetView<BookEditController> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller:
                                                   controller.penulisController,
@@ -270,7 +270,7 @@ class BookEditView extends GetView<BookEditController> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller:
                                                   controller.penerbitController,
@@ -312,7 +312,7 @@ class BookEditView extends GetView<BookEditController> {
                                             ),
                                           ),
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller: controller
                                                   .tahunTerbitController,
@@ -380,55 +380,65 @@ class BookEditView extends GetView<BookEditController> {
                               child: Column(
                                 children: [
                                   Obx(
-                                    () => SizedBox(
-                                      width: widthBody,
-                                      height: heightBody * 0.4,
-                                      child: ListView.separated(
-                                          itemBuilder: (context, index) {
-                                            return Container(
-                                              color: Colors.black12,
-                                              child: ListTile(
-                                                title: Text(controller
-                                                    .dataFile[index].nama!),
-                                                trailing: SizedBox(
-                                                  width: widthBody * 0.35,
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceAround,
-                                                    children: [
-                                                      ElevatedButton(
-                                                          style: const ButtonStyle(
-                                                              padding:
-                                                                  MaterialStatePropertyAll(
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              1))),
-                                                          onPressed: () {},
-                                                          child: const Icon(
-                                                              Icons.edit)),
-                                                      ElevatedButton(
-                                                          style: const ButtonStyle(
-                                                              padding:
-                                                                  MaterialStatePropertyAll(
-                                                                      EdgeInsets
-                                                                          .all(
-                                                                              1))),
-                                                          onPressed: () {},
-                                                          child: const Icon(
-                                                              Icons.delete))
-                                                    ],
-                                                  ),
-                                                ),
-                                              ),
-                                            );
-                                          },
-                                          separatorBuilder: (context, index) {
-                                            return const Divider();
-                                          },
-                                          itemCount:
-                                              controller.dataFile.length),
-                                    ),
+                                    () => controller.fileLoading.value == false
+                                        ? SizedBox(
+                                            width: widthBody,
+                                            height: heightBody * 0.4,
+                                            child: ListView.separated(
+                                                itemBuilder: (context, index) {
+                                                  return Container(
+                                                    color: Colors.black12,
+                                                    child: ListTile(
+                                                      title: Text(controller
+                                                          .dataFile[index]
+                                                          .nama!),
+                                                      trailing: SizedBox(
+                                                        width: widthBody * 0.35,
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .spaceAround,
+                                                          children: [
+                                                            ElevatedButton(
+                                                                style: const ButtonStyle(
+                                                                    padding: MaterialStatePropertyAll(
+                                                                        EdgeInsets.all(
+                                                                            1))),
+                                                                onPressed:
+                                                                    () {},
+                                                                child: const Icon(
+                                                                    Icons
+                                                                        .edit)),
+                                                            ElevatedButton(
+                                                                style: const ButtonStyle(
+                                                                    padding: MaterialStatePropertyAll(
+                                                                        EdgeInsets.all(
+                                                                            1))),
+                                                                onPressed: () {
+                                                                  controller.deleteFile(controller
+                                                                      .dataFile[
+                                                                          index]
+                                                                      .fileID!);
+                                                                },
+                                                                child: const Icon(
+                                                                    Icons
+                                                                        .delete))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) {
+                                                  return const Divider();
+                                                },
+                                                itemCount:
+                                                    controller.dataFile.length),
+                                          )
+                                        : const Center(
+                                            child: CircularProgressIndicator(),
+                                          ),
                                   ),
                                   SizedBox(
                                     height: heightBody * 0.02,
@@ -444,13 +454,15 @@ class BookEditView extends GetView<BookEditController> {
                                   ),
                                   SizedBox(
                                     width: widthBody,
-                                    height: heightBody * 0.15,
+                                    height: 150,
                                     child: Form(
                                       key: controller.formKeyFile,
                                       child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           SizedBox(
-                                            height: heightBody * 0.07,
+                                            height: 60,
                                             child: TextFormField(
                                               controller:
                                                   controller.namaFileController,
@@ -490,6 +502,51 @@ class BookEditView extends GetView<BookEditController> {
                                                                   color: Colors
                                                                       .grey))),
                                             ),
+                                          ),
+                                          SizedBox(
+                                            height: 60,
+                                            child: TextFormField(
+                                              onTap: () {
+                                                controller.pickFile();
+                                              },
+                                              readOnly: true,
+                                              controller: controller
+                                                  .filePickNameController,
+                                              style: const TextStyle(
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              maxLines: 1,
+                                              decoration: InputDecoration(
+                                                  counterText: "",
+                                                  focusedBorder:
+                                                      OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  color: Colors
+                                                                      .blue
+                                                                      .shade700,
+                                                                  width: 1)),
+                                                  hintText: "Tidak ada file",
+                                                  floatingLabelStyle:
+                                                      const TextStyle(
+                                                          color:
+                                                              Colors
+                                                                  .blueAccent),
+                                                  hintStyle:
+                                                      TextStyle(
+                                                          color: Colors.grey,
+                                                          fontFamily: "Poppins",
+                                                          fontSize:
+                                                              GlobalVariable
+                                                                  .textmd),
+                                                  border:
+                                                      const OutlineInputBorder(
+                                                          borderSide:
+                                                              BorderSide(
+                                                                  width: 1,
+                                                                  color: Colors
+                                                                      .grey))),
+                                            ),
                                           )
                                         ],
                                       ),
@@ -501,9 +558,9 @@ class BookEditView extends GetView<BookEditController> {
                                   Obx(() => controller.loadingButton.value
                                       ? const CircularProgressIndicator()
                                       : ButtonWidget(
-                                          text: "Add file",
+                                          text: "Send file",
                                           onPressed: () {
-                                            controller.updateBook();
+                                            controller.sendFile();
                                           },
                                           horizontal: widthBody * 0.3,
                                           vertical: heightBody * 0.015)),
