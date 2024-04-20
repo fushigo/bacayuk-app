@@ -12,8 +12,6 @@ import 'package:get/get.dart';
 
 class HistoryController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  //TODO: Implement HistoryController
-
   final loading = false.obs;
 
   final dataPeminjaman = RxList<DataPeminjamanUserid>();

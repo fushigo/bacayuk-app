@@ -14,7 +14,6 @@ import 'package:quickalert/quickalert.dart';
 
 class BookDetailController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  //TODO: Implement BookDetailController
   final bookId = Get.parameters["id"];
   final fileId = 0.obs;
 

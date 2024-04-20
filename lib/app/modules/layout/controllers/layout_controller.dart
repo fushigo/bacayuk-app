@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 
 class LayoutController extends GetxController {
-  //TODO: Implement LayoutController
-
   final count = 0.obs;
   var tabIndex = 0.obs;
 

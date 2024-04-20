@@ -12,8 +12,8 @@ class OtpForm extends GetView<OtpController> {
 
   final bool first;
   final bool last;
-  final widthContent;
-  final heightContent;
+  final double widthContent;
+  final double heightContent;
 
   final TextEditingController textEditingController;
 

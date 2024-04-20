@@ -12,8 +12,6 @@ import 'package:get/get.dart';
 import 'package:quickalert/quickalert.dart';
 
 class BookViewerController extends GetxController {
-  //TODO: Implement BookViewerController
-
   final count = 0.obs;
   final pdfbase64 = "".obs;
   final fileId = Get.parameters["fileid"];

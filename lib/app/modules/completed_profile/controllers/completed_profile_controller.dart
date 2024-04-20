@@ -14,8 +14,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CompletedProfileController extends GetxController {
-  //TODO: Implement CompletedProfileController
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController namalengkapController = TextEditingController();
   final TextEditingController bioController = TextEditingController();
@@ -61,10 +59,9 @@ class CompletedProfileController extends GetxController {
         context: Get.context!,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
-        lastDate: DateTime(2300)
-    );
+        lastDate: DateTime(2300));
 
-    if(picked != null) {
+    if (picked != null) {
       tanggallahirController.text = picked.toString().split(" ")[0];
     }
   }

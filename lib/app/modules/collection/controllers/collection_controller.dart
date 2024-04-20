@@ -10,8 +10,6 @@ import 'package:get/get.dart';
 import 'package:quickalert/quickalert.dart';
 
 class CollectionController extends GetxController {
-  //TODO: Implement CollectionController
-
   final token = StorageProvider.read(StorageKey.token);
 
   final dataKoleksi = RxList<DataKoleksiUserId>();

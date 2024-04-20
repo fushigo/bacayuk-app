@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class RegisterController extends GetxController {
-  //TODO: Implement RegisterController
-
   final loading = false.obs;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController usernameController = TextEditingController();
@@ -21,8 +19,6 @@ class RegisterController extends GetxController {
   final checkBoxValue = false.obs;
 
   final count = 0.obs;
-
-
 
   void onToggle() {
     checkBoxValue.value = !checkBoxValue.value;

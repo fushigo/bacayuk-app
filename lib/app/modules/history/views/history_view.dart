@@ -95,9 +95,6 @@ class HistoryView extends GetView<HistoryController> {
                                                       .cover!)),
                                             ),
                                           ),
-                                          SizedBox(
-                                            height: heightBody * 0.01,
-                                          ),
                                           Text(
                                             controller.dataPeminjaman[index]
                                                 .buku!.judul!,
@@ -157,9 +154,6 @@ class HistoryView extends GetView<HistoryController> {
                                                       .buku!
                                                       .cover!)),
                                             ),
-                                          ),
-                                          SizedBox(
-                                            height: heightBody * 0.01,
                                           ),
                                           Text(
                                             controller.dataHistory[index].buku!

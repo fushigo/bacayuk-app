@@ -13,8 +13,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class BookController extends GetxController with GetTickerProviderStateMixin {
-  //TODO: Implement BookController
-
   final token = StorageProvider.read(StorageKey.token);
   final dataGenreBuku = RxList<DataGenre>();
   final dataKategoriBuku = RxList<KategoriData>();

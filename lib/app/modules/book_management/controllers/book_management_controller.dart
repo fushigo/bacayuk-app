@@ -9,8 +9,6 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class BookManagementController extends GetxController {
-  //TODO: Implement BookManagementController
-
   final token = StorageProvider.read(StorageKey.token);
   final dataBook = RxList<BookData>();
 

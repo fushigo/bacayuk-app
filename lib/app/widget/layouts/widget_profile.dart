@@ -9,8 +9,8 @@ class WidgetProfile extends GetView<HomeController> {
   const WidgetProfile(
       {super.key, required this.widthBody, required this.heightBody});
 
-  final widthBody;
-  final heightBody;
+  final double widthBody;
+  final double heightBody;
 
   @override
   Widget build(BuildContext context) {

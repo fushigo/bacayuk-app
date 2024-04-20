@@ -9,8 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  //TODO: Implement LoginController
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -51,7 +49,7 @@ class LoginController extends GetxController {
           } else if (emailStatus == "unverify") {
             return Get.toNamed(Routes.OTP,
                 parameters: {"email": emailController.text.toString()});
-          }else{
+          } else {
             final result = ResponseLogin.fromJson(response.data);
             await StorageProvider.write(StorageKey.status, "logged");
             await StorageProvider.write(StorageKey.token, result.token!);

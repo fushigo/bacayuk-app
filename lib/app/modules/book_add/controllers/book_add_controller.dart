@@ -13,8 +13,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 class BookAddController extends GetxController {
-  //TODO: Implement BookAddController
-
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final TextEditingController judulController = TextEditingController();
   final TextEditingController sinopsisController = TextEditingController();

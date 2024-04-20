@@ -75,9 +75,6 @@ class CollectionView extends GetView<CollectionController> {
                                       ),
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: heightBody * 0.01,
-                                  ),
                                   Text(
                                     controller.dataKoleksi[index].buku!.judul!,
                                     textAlign: TextAlign.start,

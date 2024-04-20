@@ -13,13 +13,11 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class SplashController extends GetxController {
-  //TODO: Implement SplashController
-
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> _deviceData = <String, dynamic>{};
 
   @override
-  void onInit(){
+  void onInit() {
     super.onInit();
     checkSession();
   }

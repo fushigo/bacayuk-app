@@ -2,10 +2,10 @@ import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:flutter/material.dart';
 
 class TextView extends StatelessWidget {
-  TextView(
+  const TextView(
       {super.key, required this.widthContent, required this.heightContent});
-  final widthContent;
-  final heightContent;
+  final double widthContent;
+  final double heightContent;
 
   @override
   Widget build(BuildContext context) {

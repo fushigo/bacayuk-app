@@ -1,12 +1,10 @@
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:bacayuk/app/data/constant/endpoint.dart';
 import 'package:bacayuk/app/data/model/response_book_id.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/image_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
-import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/viewers/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:file_picker/file_picker.dart';
@@ -16,8 +14,6 @@ import 'package:image_picker/image_picker.dart';
 
 class BookEditController extends GetxController
     with GetSingleTickerProviderStateMixin {
-  //TODO: Implement BookEditController
-
   late final tabbarController =
       Rx<TabController>(TabController(length: 2, vsync: this, initialIndex: 0));
 
