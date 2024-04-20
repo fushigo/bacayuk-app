@@ -21,6 +21,7 @@ abstract class Routes {
   static const BOOK_MANAGEMENT = _Paths.BOOK_MANAGEMENT;
   static const BOOK_ADD = _Paths.BOOK_ADD;
   static const BOOK_EDIT = _Paths.BOOK_EDIT;
+  static const ULASAN = _Paths.ULASAN;
 }
 
 abstract class _Paths {
@@ -43,4 +44,5 @@ abstract class _Paths {
   static const BOOK_MANAGEMENT = '/book-management';
   static const BOOK_ADD = '/book-add';
   static const BOOK_EDIT = '/book-edit';
+  static const ULASAN = '/ulasan';
 }

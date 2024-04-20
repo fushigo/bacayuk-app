@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:bacayuk/app/data/constant/global.dart';
 import 'package:bacayuk/app/modules/book/views/book_view.dart';
 import 'package:bacayuk/app/modules/collection/views/collection_view.dart';
 import 'package:bacayuk/app/modules/history/views/history_view.dart';
 import 'package:bacayuk/app/modules/home/views/home_view.dart';
 import 'package:bacayuk/app/modules/profile/views/profile_view.dart';
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -18,9 +15,9 @@ class LayoutView extends GetView<LayoutController> {
   @override
   Widget build(BuildContext context) {
     // final widthBody = MediaQuery.of(context).size.width;
-    final heightBody = MediaQuery.of(context).size.height -
-        MediaQuery.of(context).padding.top -
-        MediaQuery.of(context).padding.bottom;
+    // final heightBody = MediaQuery.of(context).size.height -
+    //     MediaQuery.of(context).padding.top -
+    //     MediaQuery.of(context).padding.bottom;
     // final LayoutController layoutController =
     //     Get.put(LayoutController(), permanent: false);
     return Scaffold(

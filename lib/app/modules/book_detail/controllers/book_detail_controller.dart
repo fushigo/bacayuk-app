@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bacayuk/app/data/constant/endpoint.dart';
 import 'package:bacayuk/app/data/model/response_book_id.dart';
+import 'package:bacayuk/app/data/model/response_ulasan_bookid.dart';
 import 'package:bacayuk/app/data/model/response_validasi_koleksi_user.dart';
 import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/jwt_convert.dart';
@@ -33,8 +34,8 @@ class BookDetailController extends GetxController
   final jmlahDibaca = "".obs;
 
   final dataGenreBookId = RxList<GenreRelasi>();
-  final dataUlasanBookId = RxList<UlasanBuku>();
   final dataFileBookId = RxList<File>();
+  final dataUlasan = RxList<DataUlasanBookId>();
 
   final loading = false.obs;
   final token = StorageProvider.read(StorageKey.token);
@@ -45,6 +46,7 @@ class BookDetailController extends GetxController
     super.onInit();
     tabController = TabController(length: 2, vsync: this, initialIndex: 0);
     await getBookByID();
+    await getUlasan();
   }
 
   @override
@@ -92,7 +94,6 @@ class BookDetailController extends GetxController
         jmlhKoleksi.value = responseBookById.jmlahKoleksi.toString();
         jmlahDibaca.value = responseBookById.jmlahDibaca.toString();
         dataGenreBookId.value = responseBookById.data!.genreRelasi!;
-        dataUlasanBookId.value = responseBookById.data!.ulasanBuku!;
         dataFileBookId.value = responseBookById.data!.file!;
         // if (responseBookById.data!.genreRelasi!.isNotEmpty) {
         //   dataGenreBookId.value = responseBookById.data!.genreRelasi!;
@@ -101,6 +102,26 @@ class BookDetailController extends GetxController
         // } else if (responseBookById.data!.file!.isNotEmpty) {
         //   dataFileBookId.value = responseBookById.data!.file!;
         // }
+      }
+    } catch (e) {
+      loading(false);
+      log(e.toString());
+    }
+  }
+
+  Future<void> getUlasan() async {
+    try {
+      loading(true);
+      final response = await ApiProvider.instance().get(Endpoint.ulasan,
+          queryParameters: {"bukuid": bookId},
+          options: Options(headers: {"authorization": "Bearer $token"}));
+
+      if (response.statusCode == 200) {
+        loading(false);
+        final result = ResponseUlasanBookid.fromJson(response.data!);
+        if (result.total != 0) {
+          dataUlasan.value = result.data!;
+        }
       }
     } catch (e) {
       loading(false);

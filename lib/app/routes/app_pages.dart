@@ -34,6 +34,8 @@ import '../modules/register/bindings/register_binding.dart';
 import '../modules/register/views/register_view.dart';
 import '../modules/splash/bindings/splash_binding.dart';
 import '../modules/splash/views/splash_view.dart';
+import '../modules/ulasan/bindings/ulasan_binding.dart';
+import '../modules/ulasan/views/ulasan_view.dart';
 import '../modules/welcome/bindings/welcome_binding.dart';
 import '../modules/welcome/views/welcome_view.dart';
 
@@ -134,6 +136,11 @@ class AppPages {
       name: _Paths.BOOK_EDIT,
       page: () => const BookEditView(),
       binding: BookEditBinding(),
+    ),
+    GetPage(
+      name: _Paths.ULASAN,
+      page: () => const UlasanView(),
+      binding: UlasanBinding(),
     ),
   ];
 }

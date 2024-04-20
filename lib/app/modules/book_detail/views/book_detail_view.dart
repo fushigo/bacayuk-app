@@ -1,7 +1,10 @@
 import 'package:bacayuk/app/data/constant/global.dart';
+import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/viewers/primary_button.dart';
 import 'package:bacayuk/app/widget/viewers/widget_image_memory.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import '../controllers/book_detail_controller.dart';
 
@@ -44,7 +47,7 @@ class BookDetailView extends GetView<BookDetailController> {
                         children: [
                           Container(
                             width: widthBody,
-                            height: heightBody,
+                            height: heightBody * 0.9,
                             alignment: Alignment.topCenter,
                             child: Stack(
                               alignment: Alignment.bottomCenter,
@@ -223,6 +226,7 @@ class BookDetailView extends GetView<BookDetailController> {
                                         horizontal: 10, vertical: 20),
                                     child: TabBar(
                                       controller: controller.tabController,
+                                      unselectedLabelColor: Colors.black26,
                                       tabs: [
                                         Tab(
                                           child: Text(
@@ -417,7 +421,11 @@ class BookDetailView extends GetView<BookDetailController> {
                                                         .validasiPeminjaman();
                                                   },
                                                   child: Container(
+                                                    padding: const EdgeInsets
+                                                        .symmetric(
+                                                        horizontal: 10),
                                                     width: widthBody,
+                                                    color: Colors.black12,
                                                     alignment:
                                                         Alignment.centerLeft,
                                                     height: 50,
@@ -455,8 +463,207 @@ class BookDetailView extends GetView<BookDetailController> {
                         ],
                       ),
                       Container(
-                        width: widthBody,
-                      )
+                          width: widthBody,
+                          height: heightBody * 0.6,
+                          padding: const EdgeInsets.all(10),
+                          child: Column(
+                            children: [
+                              SizedBox(
+                                  width: widthBody,
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Ulasan Buku",
+                                        style: TextStyle(
+                                            fontFamily:
+                                                GlobalVariable.fontPoppins,
+                                            fontSize: GlobalVariable.heading_3),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () => Get.toNamed(Routes.ULASAN,
+                                            parameters: {
+                                              "bukuid":
+                                                  controller.bookId.toString(),
+                                              "judul":
+                                                  controller.judulBuku.value
+                                            }),
+                                        child: Text(
+                                            "Total ${controller.dataUlasan.length} komentar >",
+                                            style: TextStyle(
+                                                color: Colors.black26,
+                                                fontFamily:
+                                                    GlobalVariable.fontPoppins,
+                                                fontSize:
+                                                    GlobalVariable.textbase)),
+                                      )
+                                    ],
+                                  )),
+                              SizedBox(
+                                  width: widthBody,
+                                  height: heightBody * 0.5,
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    itemCount: controller.dataUlasan.length < 5
+                                        ? controller.dataUlasan.length
+                                        : 5,
+                                    itemBuilder: (context, index) {
+                                      return Container(
+                                        width: widthBody,
+                                        margin: const EdgeInsets.all(5),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            SizedBox(
+                                              width: widthBody,
+                                              height: 70,
+                                              child: Row(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(
+                                                    width: 50,
+                                                    height: 50,
+                                                    child: controller
+                                                                .dataUlasan[
+                                                                    index]
+                                                                .user!
+                                                                .profile ==
+                                                            null
+                                                        ? const ClipOval(
+                                                            child: CircleAvatar(
+                                                              child: Icon(
+                                                                  Icons.person),
+                                                            ),
+                                                          )
+                                                        : ClipOval(
+                                                            child: Image(
+                                                                image: base64Image(controller
+                                                                    .dataUlasan[
+                                                                        index]
+                                                                    .user!
+                                                                    .profile!
+                                                                    .gambar
+                                                                    .toString())),
+                                                          ),
+                                                  ),
+                                                  SizedBox(
+                                                    width: widthBody * 0.03,
+                                                  ),
+                                                  SizedBox(
+                                                    child: Text(
+                                                      controller
+                                                          .dataUlasan[index]
+                                                          .user!
+                                                          .username!,
+                                                      style: TextStyle(
+                                                          fontFamily:
+                                                              GlobalVariable
+                                                                  .fontSignika,
+                                                          fontSize:
+                                                              GlobalVariable
+                                                                  .heading_3,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: widthBody * 0.5,
+                                              height: heightBody * 0.02,
+                                              child: RatingBarIndicator(
+                                                direction: Axis.horizontal,
+                                                itemPadding:
+                                                    const EdgeInsets.all(0),
+                                                itemSize: 20,
+                                                rating: controller
+                                                    .dataUlasan[index].rating!
+                                                    .toDouble(),
+                                                itemBuilder: (context, index) =>
+                                                    Icon(
+                                                  Icons.star,
+                                                  color: Colors.blue.shade900,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: heightBody * 0.01,
+                                            ),
+                                            SizedBox(
+                                              width: widthBody,
+                                              child: Text(
+                                                controller
+                                                    .dataUlasan[index].ulasan!,
+                                                maxLines: 10,
+                                                style: TextStyle(
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    fontFamily: GlobalVariable
+                                                        .fontPoppins,
+                                                    fontSize:
+                                                        GlobalVariable.textmd),
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  )
+                                  // child: ListView.separated(
+                                  //     padding: const EdgeInsets.all(0),
+                                  //     scrollDirection: Axis.vertical,
+                                  //     itemBuilder: (context, index) {
+                                  //       return ListTile(
+                                  //         leading: controller.dataUlasan[index]
+                                  //                     .user!.profile !=
+                                  //                 null
+                                  //             ? CircleAvatar(
+                                  //                 child: Image(
+                                  //                     image: base64Image(
+                                  //                         controller
+                                  //                             .dataUlasan[index]
+                                  //                             .user!
+                                  //                             .profile!
+                                  //                             .gambar!)),
+                                  //               )
+                                  //             : const CircleAvatar(
+                                  //                 child: Icon(Icons.person),
+                                  //               ),
+                                  //         title: Text(
+                                  //           controller.dataUlasan[index].user!
+                                  //               .username!,
+                                  //           style: TextStyle(
+                                  //               fontFamily:
+                                  //                   GlobalVariable.fontSignika,
+                                  //               fontSize:
+                                  //                   GlobalVariable.heading_3,
+                                  //               fontWeight: FontWeight.w500),
+                                  //         ),
+                                  //         subtitle: Text(
+                                  //           controller.dataUlasan[index].ulasan!,
+                                  //           maxLines: 10,
+                                  //           style: TextStyle(
+                                  //             overflow: TextOverflow.ellipsis,
+                                  //             fontFamily:
+                                  //                 GlobalVariable.fontPoppins,
+                                  //             fontSize: GlobalVariable.textmd,
+                                  //           ),
+                                  //         ),
+                                  //       );
+                                  //     },
+                                  //     separatorBuilder: (context, index) {
+                                  //       return const Divider();
+                                  //     },
+                                  //     itemCount: controller.dataUlasan.length),
+                                  ),
+                            ],
+                          ))
                     ],
                   ),
           ),
