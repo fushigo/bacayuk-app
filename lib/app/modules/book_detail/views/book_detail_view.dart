@@ -3,7 +3,6 @@ import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:bacayuk/app/widget/viewers/primary_button.dart';
 import 'package:bacayuk/app/widget/viewers/widget_image_memory.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import '../controllers/book_detail_controller.dart';

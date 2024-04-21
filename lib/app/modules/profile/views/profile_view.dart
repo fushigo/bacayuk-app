@@ -34,14 +34,12 @@ class ProfileView extends GetView<ProfileController> {
                           width: widthBody,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
-                              // border:
-                              //     Border.all(width: 1, color: Colors.black12),
                               color: Colors.white),
                           child: Column(
                             children: [
                               SizedBox(
                                 width: widthBody,
-                                height: heightBody * 0.17,
+                                height: heightBody * 0.2,
                                 child: Stack(
                                   alignment: Alignment.topCenter,
                                   children: [
@@ -84,7 +82,7 @@ class ProfileView extends GetView<ProfileController> {
                               ),
                               SizedBox(
                                 width: widthBody,
-                                height: heightBody * 0.1,
+                                height: heightBody * 0.15,
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -142,7 +140,7 @@ class ProfileView extends GetView<ProfileController> {
                                               TextStyle(color: Colors.black12),
                                         ),
                                         SizedBox(
-                                          width: widthBody * 0.03,
+                                          width: widthBody * 0.02,
                                         ),
                                         Text(
                                           "Joined ${DateFormat('MMMM yyyy').format(DateTime.parse(controller.dataUserProfile.value.createdAt!))}",
@@ -169,7 +167,7 @@ class ProfileView extends GetView<ProfileController> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Container(
-                                        width: widthBody * 0.35,
+                                        width: widthBody * 0.4,
                                         alignment: Alignment.center,
                                         height: 40,
                                         child: ElevatedButton.icon(
@@ -198,7 +196,7 @@ class ProfileView extends GetView<ProfileController> {
                                           ),
                                         )),
                                     Container(
-                                        width: widthBody * 0.3,
+                                        width: widthBody * 0.35,
                                         alignment: Alignment.center,
                                         height: 40,
                                         child: ElevatedButton.icon(
@@ -218,7 +216,9 @@ class ProfileView extends GetView<ProfileController> {
                                                       .black12), // Menambahkan border abu
                                             )),
                                           ),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            controller.logoutApp();
+                                          },
                                           icon: const Icon(Icons.logout),
                                           label: const Text(
                                             "Logout",
@@ -309,6 +309,7 @@ class ProfileView extends GetView<ProfileController> {
                                   Text(
                                     controller.dataUserProfile.value.email!,
                                     style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
                                         fontFamily: GlobalVariable.fontPoppins,
                                         fontWeight: FontWeight.bold),
                                   )
@@ -347,6 +348,7 @@ class ProfileView extends GetView<ProfileController> {
                                   Text(
                                     controller.dataUserProfile.value.alamat!,
                                     style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
                                         fontFamily: GlobalVariable.fontPoppins,
                                         fontWeight: FontWeight.bold),
                                   )
@@ -385,9 +387,15 @@ class ProfileView extends GetView<ProfileController> {
                                   Text(
                                     controller.dataUserProfile.value.profile !=
                                             null
-                                        ? "Joined ${DateFormat('MMMM yyyy').format(DateTime.parse(controller.dataUserProfile.value.profile!.tanggalLahir!))}"
+                                        ? DateFormat('dd MMMM yyyy').format(
+                                            DateTime.parse(controller
+                                                .dataUserProfile
+                                                .value
+                                                .profile!
+                                                .tanggalLahir!))
                                         : "-",
                                     style: TextStyle(
+                                        overflow: TextOverflow.ellipsis,
                                         fontFamily: GlobalVariable.fontPoppins,
                                         fontWeight: FontWeight.bold),
                                   )

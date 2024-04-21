@@ -18,6 +18,8 @@ import '../modules/collection/bindings/collection_binding.dart';
 import '../modules/collection/views/collection_view.dart';
 import '../modules/completed_profile/bindings/completed_profile_binding.dart';
 import '../modules/completed_profile/views/completed_profile_view.dart';
+import '../modules/dashboard/bindings/dashboard_binding.dart';
+import '../modules/dashboard/views/dashboard_view.dart';
 import '../modules/history/bindings/history_binding.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
@@ -141,6 +143,11 @@ class AppPages {
       name: _Paths.ULASAN,
       page: () => const UlasanView(),
       binding: UlasanBinding(),
+    ),
+    GetPage(
+      name: _Paths.DASHBOARD,
+      page: () => const DashboardView(),
+      binding: DashboardBinding(),
     ),
   ];
 }

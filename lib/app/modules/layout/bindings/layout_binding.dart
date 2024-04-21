@@ -1,5 +1,6 @@
 import 'package:bacayuk/app/modules/book/controllers/book_controller.dart';
 import 'package:bacayuk/app/modules/collection/controllers/collection_controller.dart';
+import 'package:bacayuk/app/modules/dashboard/controllers/dashboard_controller.dart';
 import 'package:bacayuk/app/modules/history/controllers/history_controller.dart';
 import 'package:bacayuk/app/modules/home/controllers/home_controller.dart';
 import 'package:bacayuk/app/modules/profile/controllers/profile_controller.dart';
@@ -18,5 +19,6 @@ class LayoutBinding extends Bindings {
     Get.lazyPut<CollectionController>(() => CollectionController());
     Get.lazyPut<HistoryController>(() => HistoryController());
     Get.lazyPut<ProfileController>(() => ProfileController());
+    Get.lazyPut<DashboardController>(() => DashboardController());
   }
 }
