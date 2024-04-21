@@ -84,7 +84,7 @@ class HistoryView extends GetView<HistoryController> {
                                         children: [
                                           SizedBox(
                                             width: 200,
-                                            height: 200,
+                                            height: 150,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
@@ -95,6 +95,7 @@ class HistoryView extends GetView<HistoryController> {
                                                       .cover!)),
                                             ),
                                           ),
+                                          SizedBox(height: heightBody * 0.01),
                                           Text(
                                             controller.dataPeminjaman[index]
                                                 .buku!.judul!,
@@ -144,7 +145,7 @@ class HistoryView extends GetView<HistoryController> {
                                         children: [
                                           SizedBox(
                                             width: 200,
-                                            height: 200,
+                                            height: 150,
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(10),
@@ -155,6 +156,7 @@ class HistoryView extends GetView<HistoryController> {
                                                       .cover!)),
                                             ),
                                           ),
+                                          SizedBox(height: heightBody * 0.01),
                                           Text(
                                             controller.dataHistory[index].buku!
                                                 .judul!,

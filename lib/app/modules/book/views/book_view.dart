@@ -102,7 +102,7 @@ class BookView extends GetView<BookController> {
                                                                   index]
                                                               .cover!))),
                                               Container(
-                                                  width: widthBody * 0.68,
+                                                  width: widthBody * 0.6,
                                                   // color: Colors.red,
                                                   padding:
                                                       const EdgeInsets.all(5),

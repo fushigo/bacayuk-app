@@ -47,7 +47,7 @@ class BookDetailView extends GetView<BookDetailController> {
                         children: [
                           Container(
                             width: widthBody,
-                            height: heightBody * 0.9,
+                            height: heightBody,
                             alignment: Alignment.topCenter,
                             child: Stack(
                               alignment: Alignment.bottomCenter,

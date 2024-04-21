@@ -66,7 +66,7 @@ class CollectionView extends GetView<CollectionController> {
                                 children: [
                                   SizedBox(
                                     width: 200,
-                                    height: 200,
+                                    height: 150,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Image(
@@ -75,6 +75,7 @@ class CollectionView extends GetView<CollectionController> {
                                       ),
                                     ),
                                   ),
+                                  SizedBox(height: heightBody * 0.01),
                                   Text(
                                     controller.dataKoleksi[index].buku!.judul!,
                                     textAlign: TextAlign.start,
