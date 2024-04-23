@@ -9,6 +9,7 @@ import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:quickalert/quickalert.dart';
 
 class HistoryController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -84,6 +85,38 @@ class HistoryController extends GetxController
       }
     } catch (e) {
       loading(false);
+      log(e.toString());
+    }
+  }
+
+  Future<void> deleteKoleksi(index) async {
+    try {
+      QuickAlert.show(
+        context: Get.context!,
+        type: QuickAlertType.confirm,
+        showCancelBtn: true,
+        showConfirmBtn: true,
+        title: "Apakah anda yakin?",
+        text:
+            "Anda akan menghapus buku ${dataHistory[index].buku!.judul} dari daftar history.",
+        onConfirmBtnTap: () async {
+          final response = await ApiProvider.instance().delete(Endpoint.koleksi,
+              queryParameters: {"id": dataHistory[index].historyBacaID},
+              options: Options(headers: {"authorization": "Bearer $token"}));
+
+          if (response.statusCode == 200) {
+            QuickAlert.show(
+                context: Get.context!,
+                type: QuickAlertType.success,
+                autoCloseDuration: const Duration(seconds: 3),
+                title: "Berhasil Dihapus!",
+                text: "Buku berhasil dihapus dari daftar history baca.");
+            await getHistory();
+            update();
+          }
+        },
+      );
+    } catch (e) {
       log(e.toString());
     }
   }

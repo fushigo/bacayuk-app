@@ -8,6 +8,7 @@ import 'package:bacayuk/app/data/provider/api_provider.dart';
 import 'package:bacayuk/app/data/provider/jwt_convert.dart';
 import 'package:bacayuk/app/data/provider/storage_provider.dart';
 import 'package:bacayuk/app/routes/app_pages.dart';
+import 'package:bacayuk/app/widget/viewers/snackbar.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -139,12 +140,21 @@ class BookDetailController extends GetxController
           options: Options(headers: {"authorization": "Bearer $token"}));
 
       if (dataPeminjaman.statusCode == 200) {
-        Get.toNamed(Routes.BOOK_VIEWER, parameters: {
-          "fileid": fileId.value != 0
-              ? fileId.value.toString()
-              : dataFileBookId[0].fileID.toString(),
-          "id": bookId.toString()
-        });
+        final validasiPeminjaman = await ApiProvider.instance().get(
+            Endpoint.validasi,
+            queryParameters: {"bukuid": bookId, "userid": userId});
+
+        if (validasiPeminjaman.statusCode == 200) {
+          Get.toNamed(Routes.BOOK_VIEWER, parameters: {
+            "fileid": fileId.value != 0
+                ? fileId.value.toString()
+                : dataFileBookId[0].fileID.toString(),
+            "id": bookId.toString()
+          });
+        } else {
+          SnackBarWidget.snackBarError(
+              "Waktu peminjama telah usai, mohon untuk meminjam buku kembali!");
+        }
       } else {
         log("alert");
         QuickAlert.show(
@@ -168,8 +178,8 @@ class BookDetailController extends GetxController
               selectDate();
             },
           ),
-          onConfirmBtnTap: () {
-            peminjaman();
+          onConfirmBtnTap: () async {
+            await peminjaman();
           },
           title: "Return Data",
           text: "Please choose a time to return the book",
@@ -177,7 +187,10 @@ class BookDetailController extends GetxController
       }
     } on DioException catch (e) {
       if (e.message != null) {
-        log("a ${e.message.toString()}");
+        if (e.response!.data["message"] == "Token expired") {
+          SnackBarWidget.snackBarError(
+              "Waktu peminjama telah usai, mohon untuk meminjam buku kembali!");
+        }
       }
     } catch (e) {
       log("b ${e.toString()}");

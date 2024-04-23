@@ -27,7 +27,7 @@ class RegisterController extends GetxController {
 
   void increment() => count.value++;
 
-  register() async {
+  Future<void> register() async {
     if (usernameController.text.isEmpty ||
         usernameController.text.trim() == "" ||
         usernameController.text.length < 5) {

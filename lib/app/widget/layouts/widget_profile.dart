@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:bacayuk/app/modules/home/controllers/home_controller.dart';
+import 'package:bacayuk/app/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,8 +45,8 @@ class WidgetProfile extends GetView<HomeController> {
                         child: FittedBox(
                           fit: BoxFit.fill,
                           child: controller.profileImage.value != null
-                        ? Image.memory(controller.profileImage.value!)
-                          : Image.asset("asset/image/person.png"),
+                              ? Image.memory(controller.profileImage.value!)
+                              : Image.asset("asset/image/person.png"),
                         ),
                       )),
                 ),
@@ -110,7 +111,7 @@ class WidgetProfile extends GetView<HomeController> {
                 ),
                 child: IconButton(
                   onPressed: () {
-                    // Tambahkan fungsi ketika tombol ditekan
+                    Get.toNamed(Routes.BOOK_SEARCH);
                   },
                   icon: const Icon(Icons.search),
                   iconSize: 30,

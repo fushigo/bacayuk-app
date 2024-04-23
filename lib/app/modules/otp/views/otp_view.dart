@@ -116,8 +116,8 @@ class OtpView extends GetView<OtpController> {
                     Obx(() => InkWell(
                           onTap: controller.isTimerRunning.value
                               ? null
-                              : () {
-                                  controller.resendotp();
+                              : () async {
+                                  await controller.resendotp();
                                   controller.resetTimer();
                                 },
                           child: Obx(() => Text(
@@ -139,8 +139,8 @@ class OtpView extends GetView<OtpController> {
                   ? const CircularProgressIndicator()
                   : ButtonWidget(
                       text: "Verify",
-                      onPressed: () {
-                        controller.verify();
+                      onPressed: () async {
+                        await controller.verify();
                       },
                       horizontal: widthBody * 0.3,
                       vertical: heightBody * 0.015,

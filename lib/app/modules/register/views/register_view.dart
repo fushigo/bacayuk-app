@@ -13,7 +13,8 @@ class RegisterView extends GetView<RegisterController> {
   @override
   Widget build(BuildContext context) {
     final widthBody = MediaQuery.of(context).size.width;
-    final heightBody = MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
+    final heightBody =
+        MediaQuery.of(context).size.height - MediaQuery.of(context).padding.top;
     GlobalOrientation.orientationPotrait();
     return Scaffold(
         body: SafeArea(
@@ -53,14 +54,18 @@ class RegisterView extends GetView<RegisterController> {
               SizedBox(
                 child: Column(
                   children: [
-                    Obx(() => controller.loading.value ? const CircularProgressIndicator() : ButtonWidget(
-                      onPressed: () {
-                        controller.register();
-                      },
-                      text: "Sign Up",
-                      horizontal: 110,
-                      vertical: 12.00,
-                    ),),
+                    Obx(
+                      () => controller.loading.value
+                          ? const CircularProgressIndicator()
+                          : ButtonWidget(
+                              onPressed: () async {
+                                await controller.register();
+                              },
+                              text: "Sign Up",
+                              horizontal: 110,
+                              vertical: 12.00,
+                            ),
+                    ),
                     Container(
                         margin: const EdgeInsets.only(top: 20),
                         alignment: Alignment.center,

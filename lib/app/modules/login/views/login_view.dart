@@ -52,14 +52,18 @@ class LoginView extends GetView<LoginController> {
               SizedBox(
                 child: Column(
                   children: [
-                    Obx(() => controller.loading.value ? const CircularProgressIndicator() : ButtonWidget(
-                      onPressed: () {
-                        controller.login();
-                      },
-                      text: "Sign In",
-                      horizontal: 110,
-                      vertical: 12.00,
-                    ),),
+                    Obx(
+                      () => controller.loading.value
+                          ? const CircularProgressIndicator()
+                          : ButtonWidget(
+                              onPressed: () async {
+                                await controller.login();
+                              },
+                              text: "Sign In",
+                              horizontal: 110,
+                              vertical: 12.00,
+                            ),
+                    ),
                     Container(
                         margin: const EdgeInsets.only(top: 20),
                         alignment: Alignment.center,

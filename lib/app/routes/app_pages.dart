@@ -12,6 +12,8 @@ import '../modules/book_edit/bindings/book_edit_binding.dart';
 import '../modules/book_edit/views/book_edit_view.dart';
 import '../modules/book_management/bindings/book_management_binding.dart';
 import '../modules/book_management/views/book_management_view.dart';
+import '../modules/book_search/bindings/book_search_binding.dart';
+import '../modules/book_search/views/book_search_view.dart';
 import '../modules/book_viewer/bindings/book_viewer_binding.dart';
 import '../modules/book_viewer/views/book_viewer_view.dart';
 import '../modules/collection/bindings/collection_binding.dart';
@@ -148,6 +150,11 @@ class AppPages {
       name: _Paths.DASHBOARD,
       page: () => const DashboardView(),
       binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: _Paths.BOOK_SEARCH,
+      page: () => const BookSearchView(),
+      binding: BookSearchBinding(),
     ),
   ];
 }

@@ -66,12 +66,12 @@ class CompletedProfileController extends GetxController {
     }
   }
 
-  sendProfile() async {
+  Future<void> sendProfile() async {
     if (namalengkapController.text.isEmpty ||
         namalengkapController.text.trim() == "") {
-      return SnackBarWidget.snackBarInfo("Fullname cannot be empty");
+      return SnackBarWidget.snackBarInfo("Nama lengkap tidak boleh kosong");
     } else if (bioController.text.isEmpty || bioController.text.trim() == "") {
-      return SnackBarWidget.snackBarInfo("Brithday cannot be empty");
+      return SnackBarWidget.snackBarInfo("Tanggal lahir tidak boleh kosong");
     } else if (alamatController.text.isEmpty ||
         alamatController.text.trim() == "") {
       return SnackBarWidget.snackBarInfo("Address cannot be empty");
@@ -81,7 +81,10 @@ class CompletedProfileController extends GetxController {
         imagePath.value.trim() != "" ||
         imagePath.value != "") {
       profilePict = (await ImageConvert.imageToBase64(imagePath.value))!;
-    } else {}
+    } else {
+      return SnackBarWidget.snackBarInfo(
+          "Foto profile harus tidak boleh kosong");
+    }
 
     try {
       loading(true);

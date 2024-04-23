@@ -23,6 +23,7 @@ abstract class Routes {
   static const BOOK_EDIT = _Paths.BOOK_EDIT;
   static const ULASAN = _Paths.ULASAN;
   static const DASHBOARD = _Paths.DASHBOARD;
+  static const BOOK_SEARCH = _Paths.BOOK_SEARCH;
 }
 
 abstract class _Paths {
@@ -47,4 +48,5 @@ abstract class _Paths {
   static const BOOK_EDIT = '/book-edit';
   static const ULASAN = '/ulasan';
   static const DASHBOARD = '/dashboard';
+  static const BOOK_SEARCH = '/book-search';
 }

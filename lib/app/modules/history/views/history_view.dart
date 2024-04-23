@@ -141,6 +141,9 @@ class HistoryView extends GetView<HistoryController> {
                                                 .dataHistory[index].bukuID
                                                 .toString(),
                                           }),
+                                      onLongPress: () {
+                                        controller.deleteKoleksi(index);
+                                      },
                                       child: Column(
                                         children: [
                                           SizedBox(

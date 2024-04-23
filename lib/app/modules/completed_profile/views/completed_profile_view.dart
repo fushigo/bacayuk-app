@@ -61,17 +61,16 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
                       controller.getImage();
                     },
                     child: ClipOval(
-                      child: FittedBox(
-                        fit: BoxFit.fill,
-                        child: controller.imagePath.value == ''
-                            ? Image.asset(
-                          "asset/image/person.png",
-                        )
-                            : Image.file(
-                          File(controller.imagePath.value),
-                        ),
-                      )
-                    ),
+                        child: FittedBox(
+                      fit: BoxFit.fill,
+                      child: controller.imagePath.value == ''
+                          ? Image.asset(
+                              "asset/image/person.png",
+                            )
+                          : Image.file(
+                              File(controller.imagePath.value),
+                            ),
+                    )),
                   ),
                 ),
               ),
@@ -80,8 +79,8 @@ class CompletedProfileView extends GetView<CompletedProfileController> {
                   ? const CircularProgressIndicator()
                   : ButtonWidget(
                       text: "Confirm",
-                      onPressed: () {
-                        controller.sendProfile();
+                      onPressed: () async {
+                        await controller.sendProfile();
                       },
                       horizontal: widthBody * 0.3,
                       vertical: heightBody * 0.015,

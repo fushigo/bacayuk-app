@@ -18,7 +18,7 @@ class LoginController extends GetxController {
   final count = 0.obs;
   void increment() => count.value++;
 
-  login() async {
+  Future<void> login() async {
     if (emailController.text.isEmpty || emailController.text.trim() == "") {
       return SnackBarWidget.snackBarInfo("Email cannot be empty");
     } else if (!GetUtils.isEmail(emailController.text)) {

@@ -33,7 +33,6 @@ class OtpController extends GetxController {
     startTimer();
   }
 
-
   @override
   void onClose() {
     _timer.cancel();
@@ -61,7 +60,7 @@ class OtpController extends GetxController {
     startTimer();
   }
 
-  resendotp() async {
+  Future<void> resendotp() async {
     try {
       final response = await ApiProvider.instance()
           .get(Endpoint.otp, queryParameters: {"email": email});
@@ -77,7 +76,7 @@ class OtpController extends GetxController {
     }
   }
 
-  verify() async {
+  Future<void> verify() async {
     String paylaoad =
         "${otentication1.text.toString()}${otentication2.text.toString()}${otentication3.text.toString()}${otentication4.text.toString()}";
     try {
